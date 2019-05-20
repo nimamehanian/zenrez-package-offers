@@ -1,0 +1,74 @@
+{
+  "name": "offers",
+  "version": "0.0.1",
+  "description": "start",
+  "main": "./src/index.js",
+  "author": "Nima Mehanian",
+  "license": "MIT",
+  "private": true,
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ],
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
+      "react-hot-loader/babel"
+    ]
+  },
+  "scripts": {
+    "cp-index": "cp ./src/index.html ./dist",
+    "cp-favicon": "cp ./src/images/favicon.png ./dist",
+    "clean": "rm -rf dist && mkdir dist",
+    "copy": "yarn run cp-index && yarn run cp-favicon && webpack --progress",
+    "build": "yarn run clean && yarn run copy",
+    "start": "yarn run build && webpack-dev-server",
+    "test": "jest",
+    "test:watch": "yarn run test -- --watch",
+    "deploy": "NODE_ENV=production && yarn build && firebase deploy"
+  },
+  "dependencies": {
+    "connected-react-router": "6.4.0",
+    "history": "4.9.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-hot-loader": "4.8.7",
+    "react-redux": "7.0.3",
+    "react-router-dom": "5.0.0",
+    "react-spring": "8.0.20",
+    "redux": "4.0.1",
+    "redux-devtools-extension": "2.13.8",
+    "redux-observable": "1.1.0",
+    "rxjs": "6.5.2",
+    "styled-components": "4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.4",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "7.4.4",
+    "@babel/preset-env": "7.4.4",
+    "@babel/preset-react": "7.0.0",
+    "@babel/register": "7.4.4",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.6",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-react": "7.13.0",
+    "file-loader": "3.0.1",
+    "jest": "24.8.0",
+    "url-loader": "1.1.2",
+    "webpack": "4.32.0",
+    "webpack-cli": "3.3.2",
+    "webpack-dev-server": "3.4.1"
+  }
+}
