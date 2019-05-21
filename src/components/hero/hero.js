@@ -149,11 +149,25 @@ function Hero() {
     `;
 
     const BuyNowButton = styled.div`
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: ${$green1};
+      color: ${$white};
       height: 44px;
       width: 388px;
-      border-radius: 22px;
+      border-radius: 6px;
       margin: 16px 0px;
+      font-size: 20px;
+      letter-spacing: 0.62px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+      transition: all 0.15s ease;
+      &:hover {
+        box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
+      }
     `;
 
     return (
@@ -169,7 +183,7 @@ function Hero() {
           <div>custom offer</div>
           <span>Package expires 6 months after purchase</span>
         </Disclaimers>
-        <BuyNowButton />
+        <BuyNowButton onClick={() => console.log('BUY NOW')}>buy now</BuyNowButton>
       </PricingInfoWrapper>
     );
   }
