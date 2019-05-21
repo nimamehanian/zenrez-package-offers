@@ -1,5 +1,5 @@
 {
-  "name": "offers",
+  "name": "zenrez-package-offers",
   "version": "0.0.1",
   "description": "start",
   "main": "./src/index.js",
