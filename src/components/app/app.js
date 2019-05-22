@@ -3,28 +3,15 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 import GlobalStyles from 'styles/global';
 import Header from 'components/header/header';
-import Hero from 'components/hero/hero';
-import OfferExpirationTimer from 'components/offerExpirationTimer/offerExpirationTimer';
-
-// const data = {
-//   imageUrl: '',
-//   className: '',
-//   classQuantity: '',
-//   actualPrice: '',
-//   retailPrice: '',
-//   dateOfExpiration: '',
-//   studioName: '',
-//   studioDescription: '',
-//   studioAddress: '',
-// };
+import OfferDetailsPage from 'components/offerDetailsPage/offerDetailsPage';
+import { offerDetails } from 'components/data';
 
 function App() {
   return (
     <div>
       <GlobalStyles />
       <Header />
-      <Hero />
-      <OfferExpirationTimer />
+      <OfferDetailsPage data={offerDetails} />
       {/* <Switch> */}
       {/* <Route exact path="/pathA" component={CompA} /> */}
       {/* <Route exact path="/pathB" component={CompB} /> */}

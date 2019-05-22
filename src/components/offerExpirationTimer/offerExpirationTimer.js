@@ -10,6 +10,7 @@ function OfferExpirationTimer() {
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    margin-bottom: 24px;
   `;
 
   const B = styled.span`

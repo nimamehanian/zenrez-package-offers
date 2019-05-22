@@ -6,7 +6,6 @@ import {
   $green1,
   $white
 } from 'styles/colors';
-
 import classPhoto from 'images/class_pic.png';
 
 function Hero() {
