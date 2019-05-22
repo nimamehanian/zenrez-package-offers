@@ -10,7 +10,7 @@ function App() {
   return (
     <div>
       <GlobalStyles />
-      <Header />
+      <Header logo={offerDetails.logoUrl} />
       <OfferDetailsPage data={offerDetails} />
       {/* <Switch> */}
       {/* <Route exact path="/pathA" component={CompA} /> */}

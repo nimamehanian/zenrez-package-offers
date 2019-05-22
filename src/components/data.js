@@ -1,7 +1,7 @@
 export const test = '';
 
 export const offerDetails = {
-  logoUrl: '',
+  logoUrl: 'https://res.cloudinary.com/zenrez/image/upload/v1531503228/perfect-fit/5899119cc7bec43e37f534e7/v1q5vltkjh1xf4exatxk.png',
   imageUrl: '',
   className: 'yoga',
   classQuantity: 5,
