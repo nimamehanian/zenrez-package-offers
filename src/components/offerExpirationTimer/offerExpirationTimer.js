@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { $white70 } from 'styles/colors';
+import useInterval from 'utils/useInterval';
 
-function OfferExpirationTimer() {
+function OfferExpirationTimer({ dateOfExpiration }) {
   const OfferExpirationTimerWrapper = styled.div`
     background: ${$white70};
     height: 48px;
@@ -18,17 +19,35 @@ function OfferExpirationTimer() {
     margin: 0px 4px;
   `;
 
+  const expiration = new Date(dateOfExpiration);
+  const diff = () => expiration.getTime() - new Date().getTime();
+
+  const [timeRemaining, setTimeRemaining] = useState(diff());
+  useInterval(() => setTimeRemaining(diff()), 1000);
+
+  const oneDay = 24 * 60 * 60 * 1000;
+  const oneHour = 60 * 60 * 1000;
+  const oneMinute = 60 * 1000;
+  const oneSecond = 1000;
+
+  const days = Math.floor(timeRemaining / oneDay);
+  const hours = Math.floor((timeRemaining % oneDay) / oneHour);
+  const minutes = Math.floor((timeRemaining % oneHour) / oneMinute);
+  const seconds = Math.floor((timeRemaining % oneMinute) / oneSecond);
+
+  const pluralize = (unit, value) => (value === 1 ? unit : `${unit}s`);
+
   return (
     <OfferExpirationTimerWrapper>
       Offer expires in
-      <B>2</B>
-      days,
-      <B>23</B>
-      hours,
-      <B>53</B>
-      minutes, and
-      <B>25</B>
-      seconds
+      <B>{days}</B>
+      {`${pluralize('day', days)},`}
+      <B>{hours}</B>
+      {`${pluralize('hour', hours)},`}
+      <B>{minutes}</B>
+      {`${pluralize('minute', minutes)}, and`}
+      <B>{seconds}</B>
+      {`${pluralize('second', seconds)}`}
     </OfferExpirationTimerWrapper>
   );
 }

@@ -5,6 +5,7 @@ import StudioInfo from 'components/studioInfo/studioInfo';
 
 function OfferDetailsPage({ data }) {
   const {
+    dateOfExpiration,
     studioDescription,
     studioName,
     studioAddress,
@@ -14,7 +15,7 @@ function OfferDetailsPage({ data }) {
   return (
     <div>
       <Hero />
-      <OfferExpirationTimer />
+      <OfferExpirationTimer dateOfExpiration={dateOfExpiration} />
       <StudioInfo
         description={studioDescription}
         name={studioName}
