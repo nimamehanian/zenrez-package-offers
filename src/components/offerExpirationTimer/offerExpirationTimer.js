@@ -16,7 +16,7 @@ function OfferExpirationTimer({ dateOfExpiration }) {
 
   const B = styled.span`
     font-family: 'Apercu Med';
-    margin: 0px 4px;
+    margin: ${({ width }) => (width < 500 ? '0px 0px 0px 4px' : '0px 4px')};
   `;
 
   const expiration = new Date(dateOfExpiration);
@@ -40,14 +40,14 @@ function OfferExpirationTimer({ dateOfExpiration }) {
   return (
     <OfferExpirationTimerWrapper>
       Offer expires in
-      <B>{days}</B>
-      {`${pluralize('day', days)},`}
-      <B>{hours}</B>
-      {`${pluralize('hour', hours)},`}
-      <B>{minutes}</B>
-      {`${pluralize('minute', minutes)}, and`}
-      <B>{seconds}</B>
-      {`${pluralize('second', seconds)}`}
+      <B width={window.innerWidth}>{days}</B>
+      {`${window.innerWidth < 500 ? 'd' : pluralize('day', days)},`}
+      <B width={window.innerWidth}>{hours}</B>
+      {`${window.innerWidth < 500 ? 'h' : pluralize('hour', hours)},`}
+      <B width={window.innerWidth}>{minutes}</B>
+      {`${window.innerWidth < 500 ? 'm' : pluralize('minute', minutes)}, and`}
+      <B width={window.innerWidth}>{seconds}</B>
+      {`${window.innerWidth < 500 ? 's' : pluralize('second', seconds)}`}
     </OfferExpirationTimerWrapper>
   );
 }
