@@ -5,6 +5,13 @@ import StudioInfo from 'components/studioInfo/studioInfo';
 
 function OfferDetailsPage({ data }) {
   const {
+    classTitle,
+    classQuantity,
+    actualPrice,
+    retailPrice,
+    discount,
+    pricePerClass,
+    imageUrl,
     dateOfExpiration,
     studioDescription,
     studioName,
@@ -14,7 +21,15 @@ function OfferDetailsPage({ data }) {
 
   return (
     <div>
-      <Hero />
+      <Hero
+        classTitle={classTitle}
+        classQuantity={classQuantity}
+        actualPrice={actualPrice}
+        retailPrice={retailPrice}
+        discount={discount}
+        pricePerClass={pricePerClass}
+        imageUrl={imageUrl}
+      />
       <OfferExpirationTimer dateOfExpiration={dateOfExpiration} />
       <StudioInfo
         description={studioDescription}

@@ -12,15 +12,17 @@ function StudioInfo({
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    flex-wrap: wrap;
   `;
 
   const Description = styled.div`
     width: 375px;
-    margin-right: 24px;
+    margin: 0px 24px 24px;
   `;
 
   const Location = styled.div`
     width: 375px;
+    margin: 0px 24px 24px;
     span {
       font-size: 32px;
     }
@@ -52,7 +54,7 @@ function StudioInfo({
         {description}
       </Description>
       <Location>
-        <Title>location</Title>
+        <Title>location(s)</Title>
         <LocationWrapper>
           <span role="img" aria-label="location">📍</span>
           <div>

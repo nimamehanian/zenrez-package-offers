@@ -1,63 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
+  Image
+} from 'components/hero/heroSubcomponents';
+import {
   $slate,
   $text1,
   $green1,
   $white
 } from 'styles/colors';
-import classPhoto from 'images/class_pic.png';
 
-function Hero() {
+function Hero({
+  classTitle,
+  classQuantity,
+  actualPrice,
+  retailPrice,
+  discount,
+  pricePerClass,
+  imageUrl,
+}) {
   const HeroWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 360px;
+    flex-wrap: wrap-reverse;
     background: ${$slate};
     color: ${$text1};
-    img {
-      border-radius: 6px;
-      margin-right: 32px;
-    }
+    padding: 24px 0px;
   `;
-
-  function Image({ image, discount }) {
-    const ImageWrapper = styled.div`
-      position: relative;
-    `;
-
-    const Badge = styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 16px;
-      left: -32px;
-      height: 64px;
-      width: 64px;
-      border-radius: 50%;
-      background: ${$green1};
-      color: ${$white};
-      font-size: 16px;
-      line-height: 1;
-      div {
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-    `;
-
-    return (
-      <ImageWrapper>
-        <Badge>
-          {`${discount}%`}
-          <div>off</div>
-        </Badge>
-        <img src={image} alt="class" />
-      </ImageWrapper>
-    );
-  }
 
   function PricingInfo() {
     const PricingInfoWrapper = styled.div`
@@ -67,15 +37,16 @@ function Hero() {
       height: 320px;
     `;
 
-    function ClassName({ name }) {
-      const ClassNameWrapper = styled.div`
+    function ClassTitle({ name }) {
+      const ClassTitleWrapper = styled.div`
         font-size: 24px;
+        text-transform: uppercase;
       `;
 
       return (
-        <ClassNameWrapper>
+        <ClassTitleWrapper>
           {name}
-        </ClassNameWrapper>
+        </ClassTitleWrapper>
       );
     }
 
@@ -154,7 +125,7 @@ function Hero() {
       background: ${$green1};
       color: ${$white};
       height: 44px;
-      width: 388px;
+      width: 343px;
       border-radius: 6px;
       margin: 16px 0px;
       font-size: 20px;
@@ -171,12 +142,12 @@ function Hero() {
 
     return (
       <PricingInfoWrapper>
-        <ClassName name="YOGA" />
-        <PackageQuantity qty={5} />
-        <Prices actual={75} retail={100} />
+        <ClassTitle name={classTitle} />
+        <PackageQuantity qty={classQuantity} />
+        <Prices actual={actualPrice} retail={retailPrice} />
         <SavingsSummary>
-          <span>Save 25%&nbsp;</span>
-          — $15/class
+          <span>{`Save ${discount}% `}</span>
+          {`— $${pricePerClass}/class`}
         </SavingsSummary>
         <Disclaimers>
           <div>custom offer</div>
@@ -189,8 +160,8 @@ function Hero() {
 
   return (
     <HeroWrapper>
-      <Image image={classPhoto} discount={25} />
-      <PricingInfo />
+      <Image imageUrl={imageUrl} discount={discount} />
+      <PricingInfo pricePerClass={pricePerClass} />
     </HeroWrapper>
   );
 }
