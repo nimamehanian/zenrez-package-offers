@@ -5,18 +5,19 @@ import useInterval from 'utils/useInterval';
 
 function OfferExpirationTimer({ dateOfExpiration }) {
   const OfferExpirationTimerWrapper = styled.div`
-    background: ${$white70};
-    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: ${$white70};
+    height: 48px;
     font-size: 16px;
     margin-bottom: 24px;
   `;
 
   const B = styled.span`
     font-family: 'Apercu Med';
-    margin: ${({ width }) => (width < 500 ? '0px 0px 0px 4px' : '0px 4px')};
+    margin-left: 4px;
+    margin-right: ${({ width }) => (width < 500 ? '0px' : '4px')};
   `;
 
   const expiration = new Date(dateOfExpiration);
