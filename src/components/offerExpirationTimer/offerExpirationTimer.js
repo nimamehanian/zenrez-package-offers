@@ -40,15 +40,24 @@ function OfferExpirationTimer({ dateOfExpiration }) {
 
   return (
     <OfferExpirationTimerWrapper>
-      Offer expires in
-      <B width={window.innerWidth}>{days}</B>
-      {`${window.innerWidth < 500 ? 'd' : pluralize('day', days)},`}
-      <B width={window.innerWidth}>{hours}</B>
-      {`${window.innerWidth < 500 ? 'h' : pluralize('hour', hours)},`}
-      <B width={window.innerWidth}>{minutes}</B>
-      {`${window.innerWidth < 500 ? 'm' : pluralize('minute', minutes)}, and`}
-      <B width={window.innerWidth}>{seconds}</B>
-      {`${window.innerWidth < 500 ? 's' : pluralize('second', seconds)}`}
+      {
+        timeRemaining > 0
+          ? (
+            <div>
+              Offer expires in
+              <B width={window.innerWidth}>{days}</B>
+              {`${window.innerWidth < 500 ? 'd' : pluralize('day', days)},`}
+              <B width={window.innerWidth}>{hours}</B>
+              {`${window.innerWidth < 500 ? 'h' : pluralize('hour', hours)},`}
+              <B width={window.innerWidth}>{minutes}</B>
+              {`${window.innerWidth < 500 ? 'm' : pluralize('minute', minutes)}, and`}
+              <B width={window.innerWidth}>{seconds}</B>
+              {`${window.innerWidth < 500 ? 's' : pluralize('second', seconds)}`}
+            </div>
+          )
+          : <div>Offer expired</div>
+      }
+
     </OfferExpirationTimerWrapper>
   );
 }
