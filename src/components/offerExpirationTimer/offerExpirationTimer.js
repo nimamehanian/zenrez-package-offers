@@ -24,7 +24,7 @@ function OfferExpirationTimer({ dateOfExpiration }) {
   const diff = () => expiration.getTime() - new Date().getTime();
 
   const [timeRemaining, setTimeRemaining] = useState(diff());
-  useInterval(() => setTimeRemaining(diff()), 1000);
+  useInterval(() => setTimeRemaining(diff()), (timeRemaining > 0 ? 1000 : null));
 
   const oneDay = 24 * 60 * 60 * 1000;
   const oneHour = 60 * 60 * 1000;

@@ -11,8 +11,10 @@ function useInterval(callback, period) {
     function cycle() {
       savedCallback.current();
     }
-    const id = setInterval(cycle, period);
-    return () => clearInterval(id);
+    if (period !== null) {
+      const id = setInterval(cycle, period);
+      return () => clearInterval(id);
+    }
   }, [period]);
 }
 
