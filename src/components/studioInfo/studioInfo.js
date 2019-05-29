@@ -54,7 +54,7 @@ function StudioInfo({
         {studioDescription}
       </Description>
       <Location>
-        <Title>location(s)</Title>
+        <Title>{locations.length > 1 ? 'locations' : 'location'}</Title>
         {
           locations.map(({ studioName, studioAddress, studioCityStateZip }, idx) => (
             <LocationWrapper key={`location_${idx + 1}`}>
