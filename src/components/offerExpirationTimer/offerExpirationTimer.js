@@ -45,7 +45,7 @@ export function MobileOfferExpirationTimer({ dateOfExpiration }) {
               {`${window.innerWidth < 500 ? 's' : pluralize('second', seconds)}`}
             </div>
           )
-          : <div>Offer expired</div>
+          : <div style={{ color: '#ff6382' }}>Offer expired</div>
       }
     </div>
   );

@@ -2,10 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 function StudioInfo({
-  description,
-  name,
-  address,
-  cityStateZip,
+  locations,
+  studioDescription,
 }) {
   const StudioInfoWrapper = styled.div`
     position: relative;
@@ -43,6 +41,7 @@ function StudioInfo({
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    margin-bottom: 16px;
     span {
       margin: 0px 8px 0px 4px;
     }
@@ -52,18 +51,22 @@ function StudioInfo({
     <StudioInfoWrapper>
       <Description>
         <Title>about this studio</Title>
-        {description}
+        {studioDescription}
       </Description>
       <Location>
         <Title>location(s)</Title>
-        <LocationWrapper>
-          <span role="img" aria-label="location">📍</span>
-          <div>
-            <Name>{name}</Name>
-            <div>{address}</div>
-            <div>{cityStateZip}</div>
-          </div>
-        </LocationWrapper>
+        {
+          locations.map(({ studioName, studioAddress, studioCityStateZip }, idx) => (
+            <LocationWrapper key={`location_${idx + 1}`}>
+              <span role="img" aria-label="location">📍</span>
+              <div>
+                <Name>{studioName}</Name>
+                <div>{studioAddress}</div>
+                <div>{studioCityStateZip}</div>
+              </div>
+            </LocationWrapper>
+          ))
+        }
       </Location>
     </StudioInfoWrapper>
   );

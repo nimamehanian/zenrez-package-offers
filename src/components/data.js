@@ -10,8 +10,17 @@ export const offerDetails = {
   discount: 25,
   pricePerClass: 15,
   dateOfExpiration: '2019-06-01T11:11:11.111Z',
-  studioName: 'Satori Yoga Studio',
   studioDescription: 'Satori Yoga Studio, a top-rated studio, is an unpretentious urban oasis, located in the heart of San Francisco\'s Financial District. Satori offers a variety of Yoga, Massage, and Meditation classes 7 days per week. Classes are drop-in, however pre-registration for our busy lunch time classes is recommended. Whether you live, work or play in San Francisco\'s Financial District, Satori is the perfect destination for restoring a sense of calm to your day, your week and your life.',
-  studioAddress: '110 Sutter St Ste 100',
-  studioCityStateZip: 'San Francisco, CA 94104',
+  locations: [
+    {
+      studioName: 'Satori Yoga Studio',
+      studioAddress: '110 Sutter St Ste 100',
+      studioCityStateZip: 'San Francisco, CA 94104',
+    },
+    {
+      studioName: 'Satori Yoga Studio',
+      studioAddress: '110 Sutter St Ste 100',
+      studioCityStateZip: 'San Francisco, CA 94104',
+    },
+  ],
 };

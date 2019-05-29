@@ -54,9 +54,7 @@ function OfferDetailsPage({ data }) {
     imageUrl,
     dateOfExpiration,
     studioDescription,
-    studioName,
-    studioAddress,
-    studioCityStateZip,
+    locations,
   } = data;
 
   const OfferDetailsPageWrapper = styled.div`
@@ -76,10 +74,8 @@ function OfferDetailsPage({ data }) {
       />
       <OfferExpirationTimer dateOfExpiration={dateOfExpiration} />
       <StudioInfo
-        description={studioDescription}
-        name={studioName}
-        address={studioAddress}
-        cityStateZip={studioCityStateZip}
+        locations={locations}
+        studioDescription={studioDescription}
       />
       <MobileStickyFooter dateOfExpiration={dateOfExpiration} />
     </OfferDetailsPageWrapper>
