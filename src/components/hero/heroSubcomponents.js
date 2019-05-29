@@ -5,6 +5,7 @@ import {
   $text1,
   $white
 } from 'styles/colors';
+import { disableHighlight } from 'styles/mixins';
 
 export function PricingInfo({
   classTitle,
@@ -18,7 +19,10 @@ export function PricingInfo({
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 320px;
+    @media (max-width: 767px) {
+      justify-content: center;
+      margin-bottom: 24px;
+    }
   `;
 
   function ClassTitle({ name }) {
@@ -140,6 +144,10 @@ export const BuyNowButton = styled.div`
     box-shadow: 0px 7px 14px rgba(50, 50, 93, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
   }
+  @media (max-width: 767px) {
+    display: none;
+  }
+  ${disableHighlight}
 `;
 
 export function MobileBadge({ discount }) {
@@ -177,6 +185,39 @@ export function MobileBadge({ discount }) {
   );
 }
 
+function Badge({ discount }) {
+  const BadgeWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 16px;
+    left: -32px;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background: ${$green1};
+    color: ${$white};
+    font-size: 16px;
+    line-height: 1;
+    @media (max-width: 767px) {
+      display: none;
+    }
+    div {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  `;
+
+  return (
+    <BadgeWrapper>
+      {`${discount}%`}
+      <div>off</div>
+    </BadgeWrapper>
+  );
+}
+
 export function Image({ imageUrl, discount }) {
   const ImageWrapper = styled.div`
     position: relative;
@@ -195,42 +236,9 @@ export function Image({ imageUrl, discount }) {
     }
   `;
 
-  function Badge() {
-    const BadgeWrapper = styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 16px;
-      left: -32px;
-      height: 64px;
-      width: 64px;
-      border-radius: 50%;
-      background: ${$green1};
-      color: ${$white};
-      font-size: 16px;
-      line-height: 1;
-      @media (max-width: 767px) {
-        display: none;
-      }
-      div {
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-    `;
-
-    return (
-      <BadgeWrapper>
-        {`${discount}%`}
-        <div>off</div>
-      </BadgeWrapper>
-    );
-  }
-
   return (
     <ImageWrapper>
-      <Badge />
+      <Badge discount={discount} />
       <img src={imageUrl} alt="class_picture" />
     </ImageWrapper>
   );

@@ -13,6 +13,7 @@ function StudioInfo({
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 24px;
   `;
 
   const Description = styled.div`

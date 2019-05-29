@@ -3,17 +3,7 @@ import styled from 'styled-components';
 import { $white70 } from 'styles/colors';
 import useInterval from 'utils/useInterval';
 
-function OfferExpirationTimer({ dateOfExpiration }) {
-  const OfferExpirationTimerWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${$white70};
-    height: 48px;
-    font-size: 16px;
-    margin-bottom: 24px;
-  `;
-
+export function MobileOfferExpirationTimer({ dateOfExpiration }) {
   const B = styled.span`
     font-family: 'Apercu Med';
     margin-left: 4px;
@@ -39,7 +29,7 @@ function OfferExpirationTimer({ dateOfExpiration }) {
   const pluralize = (unit, value) => (value === 1 ? unit : `${unit}s`);
 
   return (
-    <OfferExpirationTimerWrapper>
+    <div>
       {
         timeRemaining > 0
           ? (
@@ -57,9 +47,27 @@ function OfferExpirationTimer({ dateOfExpiration }) {
           )
           : <div>Offer expired</div>
       }
-
-    </OfferExpirationTimerWrapper>
+    </div>
   );
 }
 
-export default OfferExpirationTimer;
+export function OfferExpirationTimer({ dateOfExpiration }) {
+  const OfferExpirationTimerWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${$white70};
+    height: 48px;
+    font-size: 16px;
+    margin-bottom: 24px;
+    @media (max-width: 767px) {
+      display: none;
+    }
+  `;
+
+  return (
+    <OfferExpirationTimerWrapper>
+      {MobileOfferExpirationTimer({ dateOfExpiration })}
+    </OfferExpirationTimerWrapper>
+  );
+}
