@@ -1,9 +1,9 @@
 {
   "name": "zenrez-package-offers",
   "version": "0.0.1",
-  "description": "start",
+  "description": "zenrez-package-offers",
   "main": "./src/index.js",
-  "author": "Nima Mehanian",
+  "author": "Zenrez",
   "license": "MIT",
   "private": true,
   "babel": {

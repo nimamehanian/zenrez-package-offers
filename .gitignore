@@ -1,5 +1,8 @@
+keys.js
 dist
 node_modules
 yarn.lock
 .DS_Store
 .cache-loader
+**/firebase-debug.log
+.firebase
