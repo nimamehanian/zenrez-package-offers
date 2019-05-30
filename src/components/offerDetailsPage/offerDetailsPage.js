@@ -50,6 +50,7 @@ function OfferDetailsPage({ data }) {
     actualPrice,
     retailPrice,
     discount,
+    durationValid,
     pricePerClass,
     imageUrl,
     dateOfExpiration,
@@ -69,6 +70,7 @@ function OfferDetailsPage({ data }) {
         actualPrice={actualPrice}
         retailPrice={retailPrice}
         discount={discount}
+        durationValid={durationValid}
         pricePerClass={pricePerClass}
         imageUrl={imageUrl}
       />

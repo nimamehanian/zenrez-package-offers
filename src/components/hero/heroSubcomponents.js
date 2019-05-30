@@ -14,6 +14,7 @@ export function PricingInfo({
   retailPrice,
   pricePerClass,
   discount,
+  durationValid,
 }) {
   const PricingInfoWrapper = styled.div`
     display: flex;
@@ -117,7 +118,7 @@ export function PricingInfo({
       </SavingsSummary>
       <Disclaimers>
         <div>custom offer</div>
-        <span>Package expires 6 months after purchase</span>
+        <span>{`Package expires ${durationValid} after purchase`}</span>
       </Disclaimers>
       <BuyNowButton onClick={() => console.log('BUY NOW')}>buy now</BuyNowButton>
     </PricingInfoWrapper>

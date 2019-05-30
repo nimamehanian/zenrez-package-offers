@@ -16,6 +16,7 @@ function Hero({
   actualPrice,
   retailPrice,
   discount,
+  durationValid,
   pricePerClass,
   imageUrl,
 }) {
@@ -43,6 +44,7 @@ function Hero({
         retailPrice={retailPrice}
         pricePerClass={pricePerClass}
         discount={discount}
+        durationValid={durationValid}
       />
       <MobileBadge discount={discount} />
     </HeroWrapper>
