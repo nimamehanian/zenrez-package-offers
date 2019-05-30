@@ -48,7 +48,7 @@
     "redux-devtools-extension": "2.13.8",
     "redux-observable": "1.1.0",
     "rxjs": "6.5.2",
-    "styled-components": "4.2.0"
+    "styled-components": "4.2.1"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
