@@ -34,6 +34,7 @@ const config = {
       images: `${__dirname}/src/images`,
       styles: `${__dirname}/src/styles`,
       utils: `${__dirname}/src/utils`,
+      root: `${__dirname}`,
     },
   },
 
