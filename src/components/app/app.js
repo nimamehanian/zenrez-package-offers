@@ -4,6 +4,10 @@ import { hot } from 'react-hot-loader';
 import GlobalStyles from 'styles/global';
 import Header from 'components/header/header';
 import OfferDetailsPage from 'components/offerDetailsPage/offerDetailsPage';
+
+import { StripeProvider } from 'react-stripe-elements';
+import { STRIPE_KEY } from 'root/keys';
+
 import { offerDetails } from 'components/data';
 
 function App() {
@@ -11,7 +15,9 @@ function App() {
     <div>
       <GlobalStyles />
       <Header logo={offerDetails.logoUrl} studioUrl={offerDetails.studioUrl} />
-      <OfferDetailsPage data={offerDetails} />
+      <StripeProvider apiKey={STRIPE_KEY}>
+        <OfferDetailsPage data={offerDetails} />
+      </StripeProvider>
       {/* <Switch> */}
       {/* <Route exact path="/pathA" component={CompA} /> */}
       {/* <Route exact path="/pathB" component={CompB} /> */}
