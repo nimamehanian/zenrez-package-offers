@@ -4,7 +4,7 @@ import Hero from 'components/hero/hero';
 import { MobileOfferExpirationTimer, OfferExpirationTimer } from 'components/offerExpirationTimer/offerExpirationTimer';
 import StudioInfo from 'components/studioInfo/studioInfo';
 import PaymentField from 'components/paymentField/paymentField';
-import { BuyNowButton } from 'components/hero/heroSubcomponents';
+import Button from 'components/button/button';
 import { $white } from 'styles/colors';
 
 function MobileStickyFooter({ dateOfExpiration }) {
@@ -25,20 +25,15 @@ function MobileStickyFooter({ dateOfExpiration }) {
     }
   `;
 
-  const MobileBuyNowButton = styled(BuyNowButton)`
-    margin: 4px 0px;
-    @media (max-width: 768px) {
-      display: flex;
-    }
-  `;
-
   return (
     <MobileStickyFooterWrapper>
-      <MobileBuyNowButton
+      <Button
+        text="buy now"
         onClick={() => console.log('BUY NOW')}
+        isMobile
       >
         buy now
-      </MobileBuyNowButton>
+      </Button>
       <MobileOfferExpirationTimer dateOfExpiration={dateOfExpiration} />
     </MobileStickyFooterWrapper>
   );

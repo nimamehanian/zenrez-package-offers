@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from 'components/button/button';
 
 function PaymentField({ retailPrice, discount, tax }) {
   const PaymentFieldWrapper = styled.div`
@@ -51,37 +52,43 @@ function PaymentField({ retailPrice, discount, tax }) {
 
   return (
     <PaymentFieldWrapper>
-      <CCInfo>
-        <Title>payment</Title>
-      </CCInfo>
-      <Cost>
-        <Title>cost</Title>
-        <Items>
-          <Item>
-            <span>Price</span>
-            <span>{costs.price}</span>
-          </Item>
-          <Item>
-            <span>{`Discount (${discount}%)`}</span>
-            <span style={{ opacity: 0.65 }}>{costs.discount}</span>
-          </Item>
-          <Item>
-            <span>{`Tax (${tax}%)`}</span>
-            <span>{costs.tax}</span>
-          </Item>
-          <Item
-            style={{
-              borderTop: '1px solid rgba(82, 95, 127, 0.3)',
-              paddingTop: '8px',
-              marginTop: '8px',
-              fontSize: '18px',
-            }}
-          >
-            <span>Total</span>
-            <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
-          </Item>
-        </Items>
-      </Cost>
+      <div>
+        <CCInfo>
+          <Title>payment</Title>
+        </CCInfo>
+        <Cost>
+          <Title>cost</Title>
+          <Items>
+            <Item>
+              <span>Price</span>
+              <span>{costs.price}</span>
+            </Item>
+            <Item>
+              <span>{`Discount (${discount}%)`}</span>
+              <span style={{ opacity: 0.65 }}>{costs.discount}</span>
+            </Item>
+            <Item>
+              <span>{`Tax (${tax}%)`}</span>
+              <span>{costs.tax}</span>
+            </Item>
+            <Item
+              style={{
+                borderTop: '1px solid rgba(82, 95, 127, 0.3)',
+                paddingTop: '8px',
+                marginTop: '8px',
+                fontSize: '18px',
+              }}
+            >
+              <span>Total</span>
+              <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
+            </Item>
+          </Items>
+        </Cost>
+      </div>
+      <div>
+        <Button text="cancel" isSecondary />
+        <Button text="buy now" />
+      </div>
     </PaymentFieldWrapper>
   );
 }
