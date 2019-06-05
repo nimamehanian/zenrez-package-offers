@@ -126,6 +126,7 @@ export function PricingInfo({
         <Button
           text="buy now"
           onClickHandler={() => setIsPaymentFieldVisible(true)}
+          hideOnMobile
         >
           buy now
         </Button>

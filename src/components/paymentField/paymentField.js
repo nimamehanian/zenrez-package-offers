@@ -2,18 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from 'components/button/button';
 
-function PaymentField({ retailPrice, discount, tax }) {
+function PaymentField({
+  retailPrice,
+  discount,
+  tax,
+  setIsPaymentFieldVisible,
+}) {
   const PaymentFieldWrapper = styled.div`
-    position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     flex-wrap: wrap-reverse;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     margin-top: 24px;
+    section {
+      display: flex;
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+    }
   `;
 
   const CCInfo = styled.div`
-    width: 375px;
+    width: 320px;
     margin: 0px 24px 24px;
+    display: flex;
+    flex-direction column;
+    justify-content: center;
   `;
 
   const Cost = styled(CCInfo)``;
@@ -52,9 +67,34 @@ function PaymentField({ retailPrice, discount, tax }) {
 
   return (
     <PaymentFieldWrapper>
-      <div>
+      <section>
         <CCInfo>
           <Title>payment</Title>
+          <Items>
+            <Item>
+              <span>Price</span>
+              <span>{costs.price}</span>
+            </Item>
+            <Item>
+              <span>{`Discount (${discount}%)`}</span>
+              <span style={{ opacity: 0.65 }}>{costs.discount}</span>
+            </Item>
+            <Item>
+              <span>{`Tax (${tax}%)`}</span>
+              <span>{costs.tax}</span>
+            </Item>
+            <Item
+              style={{
+                borderTop: '1px solid rgba(82, 95, 127, 0.3)',
+                paddingTop: '8px',
+                marginTop: '8px',
+                fontSize: '18px',
+              }}
+            >
+              <span>Total</span>
+              <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
+            </Item>
+          </Items>
         </CCInfo>
         <Cost>
           <Title>cost</Title>
@@ -84,11 +124,16 @@ function PaymentField({ retailPrice, discount, tax }) {
             </Item>
           </Items>
         </Cost>
-      </div>
-      <div>
-        <Button text="cancel" isSecondary />
-        <Button text="buy now" />
-      </div>
+      </section>
+      <section>
+        <Button
+          text="cancel"
+          isSecondary
+          style={{ margin: '16px 8px' }}
+          onClickHandler={() => setIsPaymentFieldVisible(false)}
+        />
+        <Button text="buy now" style={{ margin: '16px 8px' }} />
+      </section>
     </PaymentFieldWrapper>
   );
 }

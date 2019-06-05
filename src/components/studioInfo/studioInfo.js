@@ -15,12 +15,12 @@ function StudioInfo({
   `;
 
   const Description = styled.div`
-    width: 375px;
+    width: 320px;
     margin: 0px 24px 24px;
   `;
 
   const Location = styled.div`
-    width: 375px;
+    width: 320px;
     margin: 0px 24px 24px;
     span {
       font-size: 32px;

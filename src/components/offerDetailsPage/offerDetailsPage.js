@@ -7,7 +7,7 @@ import PaymentField from 'components/paymentField/paymentField';
 import Button from 'components/button/button';
 import { $white } from 'styles/colors';
 
-function MobileStickyFooter({ dateOfExpiration }) {
+function MobileStickyFooter({ dateOfExpiration, setIsPaymentFieldVisible }) {
   const MobileStickyFooterWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -29,8 +29,8 @@ function MobileStickyFooter({ dateOfExpiration }) {
     <MobileStickyFooterWrapper>
       <Button
         text="buy now"
-        onClick={() => console.log('BUY NOW')}
         isMobile
+        onClickHandler={() => setIsPaymentFieldVisible(true)}
       >
         buy now
       </Button>
@@ -40,6 +40,8 @@ function MobileStickyFooter({ dateOfExpiration }) {
 }
 
 function OfferDetailsPage({ data }) {
+  const [isPaymentFieldVisible, setIsPaymentFieldVisible] = useState(false);
+
   const {
     classTitle,
     classQuantity,
@@ -55,10 +57,8 @@ function OfferDetailsPage({ data }) {
   } = data;
 
   const OfferDetailsPageWrapper = styled.div`
-    padding-bottom: 96px;
+    padding-bottom: ${isPaymentFieldVisible ? '16px' : '96px'};
   `;
-
-  const [isPaymentFieldVisible, setIsPaymentFieldVisible] = useState(false);
 
   return (
     <OfferDetailsPageWrapper>
@@ -82,6 +82,7 @@ function OfferDetailsPage({ data }) {
               retailPrice={retailPrice}
               discount={discount}
               tax={11.99}
+              setIsPaymentFieldVisible={setIsPaymentFieldVisible}
             />
           )
           : (
@@ -92,7 +93,14 @@ function OfferDetailsPage({ data }) {
           )
       }
 
-      {!isPaymentFieldVisible && <MobileStickyFooter dateOfExpiration={dateOfExpiration} />}
+      {!isPaymentFieldVisible
+        && (
+        <MobileStickyFooter
+          dateOfExpiration={dateOfExpiration}
+          setIsPaymentFieldVisible={setIsPaymentFieldVisible}
+        />
+        )
+      }
     </OfferDetailsPageWrapper>
   );
 }
