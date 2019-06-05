@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Hero from 'components/hero/hero';
 import { MobileOfferExpirationTimer, OfferExpirationTimer } from 'components/offerExpirationTimer/offerExpirationTimer';
 import StudioInfo from 'components/studioInfo/studioInfo';
+import PaymentField from 'components/paymentField/paymentField';
 import { BuyNowButton } from 'components/hero/heroSubcomponents';
 import { $white } from 'styles/colors';
 
@@ -62,6 +63,8 @@ function OfferDetailsPage({ data }) {
     padding-bottom: 96px;
   `;
 
+  const [isPaymentFieldVisible, setIsPaymentFieldVisible] = useState(false);
+
   return (
     <OfferDetailsPageWrapper>
       <Hero
@@ -73,13 +76,28 @@ function OfferDetailsPage({ data }) {
         durationValid={durationValid}
         pricePerClass={pricePerClass}
         imageUrl={imageUrl}
+        isPaymentFieldVisible={isPaymentFieldVisible}
+        setIsPaymentFieldVisible={setIsPaymentFieldVisible}
       />
       <OfferExpirationTimer dateOfExpiration={dateOfExpiration} />
-      <StudioInfo
-        locations={locations}
-        studioDescription={studioDescription}
-      />
-      <MobileStickyFooter dateOfExpiration={dateOfExpiration} />
+      {
+        isPaymentFieldVisible
+          ? (
+            <PaymentField
+              retailPrice={retailPrice}
+              discount={discount}
+              tax={11.99}
+            />
+          )
+          : (
+            <StudioInfo
+              locations={locations}
+              studioDescription={studioDescription}
+            />
+          )
+      }
+
+      {!isPaymentFieldVisible && <MobileStickyFooter dateOfExpiration={dateOfExpiration} />}
     </OfferDetailsPageWrapper>
   );
 }

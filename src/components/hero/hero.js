@@ -19,6 +19,8 @@ function Hero({
   durationValid,
   pricePerClass,
   imageUrl,
+  isPaymentFieldVisible,
+  setIsPaymentFieldVisible,
 }) {
   const HeroWrapper = styled.div`
     display: flex;
@@ -45,6 +47,8 @@ function Hero({
         pricePerClass={pricePerClass}
         discount={discount}
         durationValid={durationValid}
+        isPaymentFieldVisible={isPaymentFieldVisible}
+        setIsPaymentFieldVisible={setIsPaymentFieldVisible}
       />
       <MobileBadge discount={discount} />
     </HeroWrapper>

@@ -15,6 +15,8 @@ export function PricingInfo({
   pricePerClass,
   discount,
   durationValid,
+  isPaymentFieldVisible,
+  setIsPaymentFieldVisible,
 }) {
   const PricingInfoWrapper = styled.div`
     display: flex;
@@ -120,7 +122,13 @@ export function PricingInfo({
         <div>custom offer</div>
         <span>{`Package expires ${durationValid} after purchase`}</span>
       </Disclaimers>
-      <BuyNowButton onClick={() => console.log('BUY NOW')}>buy now</BuyNowButton>
+      {!isPaymentFieldVisible && (
+        <BuyNowButton
+          onClick={() => setIsPaymentFieldVisible(true)}
+        >
+          buy now
+        </BuyNowButton>
+      )}
     </PricingInfoWrapper>
   );
 }
