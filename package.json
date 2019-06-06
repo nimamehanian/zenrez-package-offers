@@ -43,7 +43,7 @@
     "react-hot-loader": "4.9.0",
     "react-redux": "7.0.3",
     "react-router-dom": "5.0.1",
-    "react-spring": "8.0.21",
+    "react-spring": "8.0.22",
     "react-stripe-elements": "3.0.0",
     "redux": "4.0.1",
     "redux-devtools-extension": "2.13.8",
@@ -70,6 +70,6 @@
     "url-loader": "2.0.0",
     "webpack": "4.33.0",
     "webpack-cli": "3.3.2",
-    "webpack-dev-server": "3.6.0"
+    "webpack-dev-server": "3.7.0"
   }
 }
