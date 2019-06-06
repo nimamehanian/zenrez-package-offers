@@ -51,6 +51,7 @@ const config = {
     disableHostCheck: true,
     historyApiFallback: true,
     hot: true,
+    https: true,
     inline: true,
     noInfo: true,
     port: 8080,
