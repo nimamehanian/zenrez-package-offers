@@ -1,6 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Elements, CardElement, injectStripe } from 'react-stripe-elements';
 import Button from 'components/button/button';
+import { $text1 } from 'styles/colors';
+
+const CreditCardForm = injectStripe(({ stripe }) => {
+  async function chargeCard(event) {
+    console.log('SUBMITTING');
+    event.prevenDefault();
+    const token = await stripe.createToken();
+    console.log(token);
+  }
+
+  return (
+    <form onSubmit={chargeCard}>
+      <CardElement
+        style={{
+          base: {
+            fontSize: '16px',
+            color: $text1,
+            '::placeholder': {
+              color: $text1,
+            },
+          },
+        }}
+      />
+    </form>
+  );
+});
 
 function PaymentField({
   retailPrice,
@@ -28,10 +55,12 @@ function PaymentField({
     margin: 0px 24px 24px;
     display: flex;
     flex-direction column;
-    justify-content: center;
+    justify-content: space-between;
   `;
 
-  const Cost = styled(CCInfo)``;
+  const Cost = styled(CCInfo)`
+
+  `;
 
   const Title = styled.div`
     font-family: 'Apercu Med';
@@ -70,31 +99,10 @@ function PaymentField({
       <section>
         <CCInfo>
           <Title>payment</Title>
-          <Items>
-            <Item>
-              <span>Price</span>
-              <span>{costs.price}</span>
-            </Item>
-            <Item>
-              <span>{`Discount (${discount}%)`}</span>
-              <span style={{ opacity: 0.65 }}>{costs.discount}</span>
-            </Item>
-            <Item>
-              <span>{`Tax (${tax}%)`}</span>
-              <span>{costs.tax}</span>
-            </Item>
-            <Item
-              style={{
-                borderTop: '1px solid rgba(82, 95, 127, 0.3)',
-                paddingTop: '8px',
-                marginTop: '8px',
-                fontSize: '18px',
-              }}
-            >
-              <span>Total</span>
-              <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
-            </Item>
-          </Items>
+          <Elements>
+            <CreditCardForm />
+          </Elements>
+          <div>[ ] Save this card for future purchases</div>
         </CCInfo>
         <Cost>
           <Title>cost</Title>
@@ -132,7 +140,11 @@ function PaymentField({
           style={{ margin: '16px 8px' }}
           onClickHandler={() => setIsPaymentFieldVisible(false)}
         />
-        <Button text="buy now" style={{ margin: '16px 8px' }} />
+        <Button
+          text="buy now"
+          style={{ margin: '16px 8px' }}
+          onClickHandler={() => console.log('SUBMIT FORM')}
+        />
       </section>
     </PaymentFieldWrapper>
   );
