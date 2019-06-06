@@ -4,31 +4,6 @@ import { Elements, CardElement, injectStripe } from 'react-stripe-elements';
 import Button from 'components/button/button';
 import { $text1 } from 'styles/colors';
 
-const CreditCardForm = injectStripe(({ stripe }) => {
-  async function chargeCard(event) {
-    console.log('SUBMITTING');
-    event.prevenDefault();
-    const token = await stripe.createToken();
-    console.log(token);
-  }
-
-  return (
-    <form onSubmit={chargeCard}>
-      <CardElement
-        style={{
-          base: {
-            fontSize: '16px',
-            color: $text1,
-            '::placeholder': {
-              color: $text1,
-            },
-          },
-        }}
-      />
-    </form>
-  );
-});
-
 function PaymentField({
   retailPrice,
   discount,
@@ -83,6 +58,7 @@ function PaymentField({
   const costs = (() => {
     const disc = 0.01 * discount * retailPrice;
     const priceAfterDiscount = retailPrice - disc;
+    // `t` is tax; ESLint complains that `tax` is defined in the surrounding scope
     const t = (retailPrice - (0.01 * discount * retailPrice)) * (0.01 * tax);
     const total = priceAfterDiscount + t;
 
@@ -94,58 +70,83 @@ function PaymentField({
     };
   })();
 
+  const CreditCardForm = injectStripe(({ stripe }) => {
+    async function chargeCard(event) {
+      event.preventDefault();
+      console.log('SUBMITTING');
+      const token = await stripe.createToken();
+      console.log(token);
+    }
+
+    return (
+      <form onSubmit={chargeCard}>
+        <section>
+          <CCInfo>
+            <Title>payment</Title>
+            <CardElement
+              style={{
+                base: {
+                  fontSize: '16px',
+                  color: $text1,
+                  '::placeholder': {
+                    color: $text1,
+                  },
+                  marginBottom: '16px',
+                },
+              }}
+            />
+          </CCInfo>
+          <Cost>
+            <Title>cost</Title>
+            <Items>
+              <Item>
+                <span>Price</span>
+                <span>{costs.price}</span>
+              </Item>
+              <Item>
+                <span>{`Discount (${discount}%)`}</span>
+                <span style={{ opacity: 0.65 }}>{costs.discount}</span>
+              </Item>
+              <Item>
+                <span>{`Tax (${tax}%)`}</span>
+                <span>{costs.tax}</span>
+              </Item>
+              <Item
+                style={{
+                  borderTop: '1px solid rgba(82, 95, 127, 0.3)',
+                  paddingTop: '8px',
+                  marginTop: '8px',
+                  fontSize: '18px',
+                }}
+              >
+                <span>Total</span>
+                <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
+              </Item>
+            </Items>
+          </Cost>
+        </section>
+        <section>
+          <Button
+            text="cancel"
+            isSecondary
+            style={{ margin: '16px 8px' }}
+            onClickHandler={() => setIsPaymentFieldVisible(false)}
+          />
+          <Button
+            text="buy now"
+            style={{ margin: '16px 8px' }}
+            onClickHandler={chargeCard}
+          />
+        </section>
+      </form>
+    );
+  });
+
   return (
     <PaymentFieldWrapper>
-      <section>
-        <CCInfo>
-          <Title>payment</Title>
-          <Elements>
-            <CreditCardForm />
-          </Elements>
-          <div>[ ] Save this card for future purchases</div>
-        </CCInfo>
-        <Cost>
-          <Title>cost</Title>
-          <Items>
-            <Item>
-              <span>Price</span>
-              <span>{costs.price}</span>
-            </Item>
-            <Item>
-              <span>{`Discount (${discount}%)`}</span>
-              <span style={{ opacity: 0.65 }}>{costs.discount}</span>
-            </Item>
-            <Item>
-              <span>{`Tax (${tax}%)`}</span>
-              <span>{costs.tax}</span>
-            </Item>
-            <Item
-              style={{
-                borderTop: '1px solid rgba(82, 95, 127, 0.3)',
-                paddingTop: '8px',
-                marginTop: '8px',
-                fontSize: '18px',
-              }}
-            >
-              <span>Total</span>
-              <span style={{ fontWeight: 'bold' }}>{costs.total}</span>
-            </Item>
-          </Items>
-        </Cost>
-      </section>
-      <section>
-        <Button
-          text="cancel"
-          isSecondary
-          style={{ margin: '16px 8px' }}
-          onClickHandler={() => setIsPaymentFieldVisible(false)}
-        />
-        <Button
-          text="buy now"
-          style={{ margin: '16px 8px' }}
-          onClickHandler={() => console.log('SUBMIT FORM')}
-        />
-      </section>
+      <Elements>
+        <CreditCardForm />
+      </Elements>
     </PaymentFieldWrapper>
   );
 }
