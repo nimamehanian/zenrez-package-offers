@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { $white70 } from 'styles/colors';
+import { $text1, $white70 } from 'styles/colors';
 import useInterval from 'utils/useInterval';
 
 export function MobileOfferExpirationTimer({ dateOfExpiration }) {
@@ -45,7 +45,7 @@ export function MobileOfferExpirationTimer({ dateOfExpiration }) {
               {`${window.innerWidth < 500 ? 's' : pluralize('second', seconds)}`}
             </div>
           )
-          : <div style={{ color: '#ff6382' }}>Offer expired</div>
+          : <div style={{ color: `${window.innerWidth < 500 ? '#ff6382' : $text1}` }}>Offer expired</div>
       }
     </div>
   );
