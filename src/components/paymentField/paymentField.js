@@ -89,8 +89,8 @@ function PaymentField({
       const { stripe } = this.props;
       event.preventDefault();
       console.log('SUBMITTING');
-      const token = await stripe.createToken();
-      console.log(token);
+      const response = await stripe.createToken();
+      console.log(response);
     }
 
     render() {

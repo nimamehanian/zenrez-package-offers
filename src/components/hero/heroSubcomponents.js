@@ -206,25 +206,28 @@ function Badge({ discount }) {
 export function Image({ imageUrl, discount }) {
   const ImageWrapper = styled.div`
     position: relative;
-    img {
-      @media (min-width: 768px) {
-        border-radius: 6px;
-        width: 280px;
-        height: 320px;
-        margin-right: 32px;
-      }
-      @media (max-width: 767px) {
-        border-radius: 0px;
-        width: 100%;
-        height: 420px;
-      }
+  `;
+
+  const Frame = styled.div`
+    background: center center no-repeat url(${imageUrl});
+    background-size: cover;
+    @media (min-width: 768px) {
+      border-radius: 6px;
+      width: 280px;
+      height: 320px;
+      margin-right: 32px;
+    }
+    @media (max-width: 767px) {
+      border-radius: 0px;
+      width: 100vw;
+      height: 420px;
     }
   `;
 
   return (
     <ImageWrapper>
       <Badge discount={discount} />
-      <img src={imageUrl} alt="class_picture" />
+      <Frame />
     </ImageWrapper>
   );
 }
