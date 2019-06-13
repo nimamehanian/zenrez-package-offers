@@ -81,6 +81,7 @@ function PaymentField({
       super(props);
       this.state = {
         isCardSaved: true,
+        isCardValid: false,
       };
       this.chargeCard = this.chargeCard.bind(this);
     }
@@ -94,13 +95,16 @@ function PaymentField({
     }
 
     render() {
-      const { isCardSaved } = this.state;
+      const { isCardSaved, isCardValid } = this.state;
       return (
         <div>
           <section>
             <CCInfo>
               <Title>payment</Title>
               <CardElement
+                onChange={({ complete, error }) => (
+                  this.setState({ isCardValid: complete && !error })
+                )}
                 style={{
                   base: {
                     fontSize: '16px',
@@ -160,6 +164,7 @@ function PaymentField({
               text="buy now"
               style={{ margin: '16px 8px' }}
               onClickHandler={this.chargeCard}
+              disabled={!isCardValid}
             />
           </section>
         </div>
