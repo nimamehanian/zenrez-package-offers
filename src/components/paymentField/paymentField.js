@@ -87,9 +87,8 @@ function PaymentField({
     }
 
     async chargeCard(event) {
-      const { stripe } = this.props;
       event.preventDefault();
-      console.log('SUBMITTING');
+      const { stripe } = this.props;
       const response = await stripe.createToken();
       console.log(response);
     }
