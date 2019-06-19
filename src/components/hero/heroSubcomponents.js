@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTrail, animated } from 'react-spring';
 import styled from 'styled-components';
 import {
   $green1,
@@ -109,19 +110,19 @@ export function PricingInfo({
     }
   `;
 
-  return (
-    <PricingInfoWrapper>
-      <ClassTitle name={classTitle} />
-      <PackageQuantity qty={classQuantity} />
-      <Prices actual={actualPrice} retail={retailPrice} />
-      <SavingsSummary>
-        <span>{`Save ${discount}% `}</span>
-        {`— $${pricePerClass}/class`}
-      </SavingsSummary>
-      <Disclaimers>
-        <div>custom offer</div>
-        <span>{`Package expires ${durationValid} after purchase`}</span>
-      </Disclaimers>
+  const components = [
+    <ClassTitle name={classTitle} />,
+    <PackageQuantity qty={classQuantity} />,
+    <Prices actual={actualPrice} retail={retailPrice} />,
+    <SavingsSummary>
+      <span>{`Save ${discount}% `}</span>
+      {`— $${pricePerClass}/class`}
+    </SavingsSummary>,
+    <Disclaimers>
+      <div>custom offer</div>
+      <span>{`Package expires ${durationValid} after purchase`}</span>
+    </Disclaimers>,
+    <span>
       {!isPaymentFieldVisible && (
         <Button
           text="buy now"
@@ -131,6 +132,26 @@ export function PricingInfo({
           buy now
         </Button>
       )}
+    </span>,
+  ];
+
+  const trail = useTrail(components.length, {
+    config: { mass: 3, tension: 4000, friction: 130 },
+    from: { opacity: 0, yPos: 16 },
+    opacity: 1,
+    yPos: 0,
+  });
+
+  return (
+    <PricingInfoWrapper>
+      {trail.map(({ opacity, yPos }, idx) => (
+        <animated.div
+          key={`item_${idx + 1}`}
+          style={{ opacity, transform: yPos.interpolate(y => `translate3d(0, ${y}px, 0)`) }}
+        >
+          {components[idx]}
+        </animated.div>
+      ))}
     </PricingInfoWrapper>
   );
 }
