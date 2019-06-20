@@ -49,6 +49,12 @@ function PaymentField({
     margin-bottom: 8px;
   `;
 
+  const CardWrapper = styled.div`
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(82, 95, 127, 0.2);
+  `;
+
   const Items = styled.div`
     display: flex;
     flex-direction: column;
@@ -100,20 +106,22 @@ function PaymentField({
           <section>
             <CCInfo>
               <Title>payment</Title>
-              <CardElement
-                onChange={({ complete, error }) => (
-                  this.setState({ isCardValid: complete && !error })
-                )}
-                style={{
-                  base: {
-                    fontSize: '16px',
-                    color: $text1,
-                    '::placeholder': {
+              <CardWrapper>
+                <CardElement
+                  onChange={({ complete, error }) => (
+                    this.setState({ isCardValid: complete && !error })
+                  )}
+                  style={{
+                    base: {
+                      fontSize: '16px',
                       color: $text1,
+                      '::placeholder': {
+                        color: $text1,
+                      },
                     },
-                  },
-                }}
-              />
+                  }}
+                />
+              </CardWrapper>
               <SaveCard>
                 <Checkbox
                   color="default"
