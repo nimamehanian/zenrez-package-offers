@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { useContext, Component } from 'react';
 import styled from 'styled-components';
 import { Elements, CardElement, injectStripe } from 'react-stripe-elements';
 import { $text1 } from 'styles/colors';
 import Button from 'components/button/button';
 import Checkbox from '@material-ui/core/Checkbox';
+import DataContext from 'components/data';
 
-function PaymentField({
-  retailPrice,
-  discount,
-  tax,
-  setIsPaymentFieldVisible,
-}) {
+function PaymentField({ tax, setIsPaymentFieldVisible }) {
+  const { discount, retailPrice } = useContext(DataContext);
+
   const PaymentFieldWrapper = styled.div`
     display: flex;
     flex-direction: column;

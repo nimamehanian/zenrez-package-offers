@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Hero from 'components/hero/hero';
 import { MobileOfferExpirationTimer, OfferExpirationTimer } from 'components/offerExpirationTimer/offerExpirationTimer';
@@ -6,22 +6,8 @@ import StudioInfo from 'components/studioInfo/studioInfo';
 import PaymentField from 'components/paymentField/paymentField';
 import Button from 'components/button/button';
 import { $white } from 'styles/colors';
-import DataContext from '../data';
 
 function OfferDetailsPage() {
-  const {
-    classTitle,
-    classQuantity,
-    actualPrice,
-    retailPrice,
-    discount,
-    durationValid,
-    pricePerClass,
-    imageUrl,
-    dateOfExpiration,
-    studioDescription,
-    locations,
-  } = useContext(DataContext);
   const [isPaymentFieldVisible, setIsPaymentFieldVisible] = useState(false);
 
   const OfferDetailsPageWrapper = styled.div`
@@ -31,40 +17,24 @@ function OfferDetailsPage() {
   return (
     <OfferDetailsPageWrapper>
       <Hero
-        classTitle={classTitle}
-        classQuantity={classQuantity}
-        actualPrice={actualPrice}
-        retailPrice={retailPrice}
-        discount={discount}
-        durationValid={durationValid}
-        pricePerClass={pricePerClass}
-        imageUrl={imageUrl}
         isPaymentFieldVisible={isPaymentFieldVisible}
         setIsPaymentFieldVisible={setIsPaymentFieldVisible}
       />
-      <OfferExpirationTimer dateOfExpiration={dateOfExpiration} />
+      <OfferExpirationTimer />
       {
         isPaymentFieldVisible
           ? (
             <PaymentField
-              retailPrice={retailPrice}
-              discount={discount}
               tax={11.99}
               setIsPaymentFieldVisible={setIsPaymentFieldVisible}
             />
           )
-          : (
-            <StudioInfo
-              locations={locations}
-              studioDescription={studioDescription}
-            />
-          )
+          : <StudioInfo />
       }
 
       {!isPaymentFieldVisible
         && (
         <MobileStickyFooter
-          dateOfExpiration={dateOfExpiration}
           setIsPaymentFieldVisible={setIsPaymentFieldVisible}
         />
         )
@@ -73,7 +43,7 @@ function OfferDetailsPage() {
   );
 }
 
-function MobileStickyFooter({ dateOfExpiration, setIsPaymentFieldVisible }) {
+function MobileStickyFooter({ setIsPaymentFieldVisible }) {
   const MobileStickyFooterWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -94,13 +64,13 @@ function MobileStickyFooter({ dateOfExpiration, setIsPaymentFieldVisible }) {
   return (
     <MobileStickyFooterWrapper>
       <Button
-        text="buy now"
         isMobile
+        text="buy now"
         onClickHandler={() => setIsPaymentFieldVisible(true)}
       >
         buy now
       </Button>
-      <MobileOfferExpirationTimer dateOfExpiration={dateOfExpiration} />
+      <MobileOfferExpirationTimer />
     </MobileStickyFooterWrapper>
   );
 }

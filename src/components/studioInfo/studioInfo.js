@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import DataContext from 'components/data';
 
-function StudioInfo({
-  locations,
-  studioDescription,
-}) {
+function StudioInfo() {
+  const { locations, studioDescription } = useContext(DataContext);
+
   const StudioInfoWrapper = styled.div`
     position: relative;
     display: flex;

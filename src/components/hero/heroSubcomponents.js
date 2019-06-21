@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTrail, animated } from 'react-spring';
 import styled from 'styled-components';
-import {
-  $green1,
-  $text1,
-  $white
-} from 'styles/colors';
+import { $text1, $white } from 'styles/colors';
 import Button from 'components/button/button';
+import DataContext from 'components/data';
 
 export function PricingInfo({
-  classTitle,
-  classQuantity,
-  actualPrice,
-  retailPrice,
-  pricePerClass,
-  discount,
-  durationValid,
   isPaymentFieldVisible,
   setIsPaymentFieldVisible,
 }) {
+  const {
+    colors: { primary },
+    classTitle,
+    classQuantity,
+    actualPrice,
+    retailPrice,
+    pricePerClass,
+    discount,
+    durationValid,
+  } = useContext(DataContext);
+
   const PricingInfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -97,7 +98,7 @@ export function PricingInfo({
   const SavingsSummary = styled.div`
     font-size: 16px;
     span {
-      color: ${$green1};
+      color: ${primary};
     }
   `;
 
@@ -156,7 +157,9 @@ export function PricingInfo({
   );
 }
 
-export function MobileBadge({ discount }) {
+export function MobileBadge() {
+  const { discount, colors: { primary } } = useContext(DataContext);
+
   const BadgeWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -165,7 +168,7 @@ export function MobileBadge({ discount }) {
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    background: ${$green1};
+    background: ${primary};
     color: ${$white};
     font-size: 16px;
     line-height: 1;
@@ -191,7 +194,9 @@ export function MobileBadge({ discount }) {
   );
 }
 
-function Badge({ discount }) {
+function Badge() {
+  const { discount, colors: { primary } } = useContext(DataContext);
+
   const BadgeWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -203,7 +208,7 @@ function Badge({ discount }) {
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    background: ${$green1};
+    background: ${primary};
     color: ${$white};
     font-size: 16px;
     line-height: 1;
@@ -224,7 +229,9 @@ function Badge({ discount }) {
   );
 }
 
-export function Image({ imageUrl, discount }) {
+export function Image() {
+  const { discount, imageUrl } = useContext(DataContext);
+
   const ImageWrapper = styled.div`
     position: relative;
   `;

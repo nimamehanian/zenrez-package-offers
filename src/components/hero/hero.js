@@ -1,24 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Image,
-  MobileBadge,
-  PricingInfo
-} from 'components/hero/heroSubcomponents';
-import {
-  $slate,
-  $text1
-} from 'styles/colors';
+import { Image, MobileBadge, PricingInfo } from 'components/hero/heroSubcomponents';
+import { $slate, $text1 } from 'styles/colors';
 
 function Hero({
-  classTitle,
-  classQuantity,
-  actualPrice,
-  retailPrice,
-  discount,
-  durationValid,
-  pricePerClass,
-  imageUrl,
   isPaymentFieldVisible,
   setIsPaymentFieldVisible,
 }) {
@@ -38,19 +23,12 @@ function Hero({
 
   return (
     <HeroWrapper>
-      <Image imageUrl={imageUrl} discount={discount} />
+      <Image />
       <PricingInfo
-        classTitle={classTitle}
-        classQuantity={classQuantity}
-        actualPrice={actualPrice}
-        retailPrice={retailPrice}
-        pricePerClass={pricePerClass}
-        discount={discount}
-        durationValid={durationValid}
         isPaymentFieldVisible={isPaymentFieldVisible}
         setIsPaymentFieldVisible={setIsPaymentFieldVisible}
       />
-      <MobileBadge discount={discount} />
+      <MobileBadge />
     </HeroWrapper>
   );
 }

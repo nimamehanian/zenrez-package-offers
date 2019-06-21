@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { $text1, $white70 } from 'styles/colors';
+import { $text1 } from 'styles/colors';
 import useInterval from 'utils/useInterval';
+import DataContext from 'components/data';
 
-export function MobileOfferExpirationTimer({ dateOfExpiration }) {
+export function MobileOfferExpirationTimer() {
+  const { dateOfExpiration } = useContext(DataContext);
+
   const B = styled.span`
     font-family: 'Apercu Med';
     margin-left: 4px;
@@ -51,12 +54,13 @@ export function MobileOfferExpirationTimer({ dateOfExpiration }) {
   );
 }
 
-export function OfferExpirationTimer({ dateOfExpiration }) {
+export function OfferExpirationTimer() {
   const OfferExpirationTimerWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${$white70};
+    background: #fff;
+    border-bottom: 1px solid rgba(82, 95, 127, 0.2);
     height: 48px;
     font-size: 16px;
     margin-bottom: 24px;
@@ -67,7 +71,7 @@ export function OfferExpirationTimer({ dateOfExpiration }) {
 
   return (
     <OfferExpirationTimerWrapper>
-      {MobileOfferExpirationTimer({ dateOfExpiration })}
+      {MobileOfferExpirationTimer()}
     </OfferExpirationTimerWrapper>
   );
 }
