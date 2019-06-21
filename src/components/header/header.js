@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { $text1, $white } from 'styles/colors';
 import styled from 'styled-components';
+import DataContext from 'components/data';
 
-function Header({ logo, studioUrl }) {
+function Header() {
+  const { logoUrl, studioUrl } = useContext(DataContext);
+
   const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -16,7 +19,7 @@ function Header({ logo, studioUrl }) {
   return (
     <HeaderWrapper>
       <a href={studioUrl} target="_blank" rel="noopener noreferrer">
-        <img src={logo} alt="logo" height={32} />
+        <img src={logoUrl} alt="logo" height={32} />
       </a>
     </HeaderWrapper>
   );

@@ -5,14 +5,12 @@ import GlobalStyles from 'styles/global';
 import Header from 'components/header/header';
 import OfferDetailsPage from 'components/offerDetailsPage/offerDetailsPage';
 
-import { offerDetails } from 'components/data';
-
 function App() {
   return (
     <div>
       <GlobalStyles />
-      <Header logo={offerDetails.logoUrl} studioUrl={offerDetails.studioUrl} />
-      <OfferDetailsPage data={offerDetails} />
+      <Header />
+      <OfferDetailsPage />
       {/* <Switch> */}
       {/* <Route exact path="/pathA" component={CompA} /> */}
       {/* <Route exact path="/pathB" component={CompB} /> */}
