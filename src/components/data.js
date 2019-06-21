@@ -9,6 +9,7 @@ const offerDetails = {
   retailPrice: 100,
   discount: 25,
   pricePerClass: 15,
+  tax: 11.99,
   dateOfExpiration: '2019-11-11T11:11:11.111Z',
   durationValid: '6 months',
   studioDescription: 'Satori Yoga Studio, a top-rated studio, is an unpretentious urban oasis, located in the heart of San Francisco\'s Financial District. Satori offers a variety of Yoga, Massage, and Meditation classes 7 days per week. Classes are drop-in, however pre-registration for our busy lunch time classes is recommended. Whether you live, work or play in San Francisco\'s Financial District, Satori is the perfect destination for restoring a sense of calm to your day, your week and your life.',

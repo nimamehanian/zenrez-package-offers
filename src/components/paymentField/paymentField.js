@@ -6,8 +6,8 @@ import Button from 'components/button/button';
 import Checkbox from '@material-ui/core/Checkbox';
 import DataContext from 'components/data';
 
-function PaymentField({ tax, setIsPaymentFieldVisible }) {
-  const { discount, retailPrice } = useContext(DataContext);
+function PaymentField({ setIsPaymentFieldVisible }) {
+  const { discount, retailPrice, tax } = useContext(DataContext);
 
   const PaymentFieldWrapper = styled.div`
     display: flex;

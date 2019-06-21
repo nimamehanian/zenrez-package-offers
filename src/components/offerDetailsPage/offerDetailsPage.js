@@ -25,7 +25,6 @@ function OfferDetailsPage() {
         isPaymentFieldVisible
           ? (
             <PaymentField
-              tax={11.99}
               setIsPaymentFieldVisible={setIsPaymentFieldVisible}
             />
           )
