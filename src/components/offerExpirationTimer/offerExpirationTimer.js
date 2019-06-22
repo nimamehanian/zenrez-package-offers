@@ -60,14 +60,14 @@ export function OfferExpirationTimer() {
     align-items: center;
     justify-content: center;
     background: #fff;
-    border-bottom: 1px solid rgba(82, 95, 127, 0.2);
     height: 48px;
     font-size: 16px;
-    margin-bottom: 24px;
     @media (max-width: 767px) {
       display: none;
     }
   `;
+  // border-bottom: 1px solid rgba(82, 95, 127, 0.2);
+  // margin-bottom: 0px;
 
   return (
     <OfferExpirationTimerWrapper>
