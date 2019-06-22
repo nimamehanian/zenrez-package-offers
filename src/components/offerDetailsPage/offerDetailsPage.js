@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Hero from 'components/hero/hero';
 import { MobileOfferExpirationTimer, OfferExpirationTimer } from 'components/offerExpirationTimer/offerExpirationTimer';
+import AuthForm from 'components/authForm/authForm';
 import StudioInfo from 'components/studioInfo/studioInfo';
 import PaymentField from 'components/paymentField/paymentField';
 import Button from 'components/button/button';
@@ -21,6 +22,7 @@ function OfferDetailsPage() {
         setIsPaymentFieldVisible={setIsPaymentFieldVisible}
       />
       <OfferExpirationTimer />
+      <AuthForm />
       {
         isPaymentFieldVisible
           ? (
