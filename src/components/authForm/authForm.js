@@ -110,7 +110,7 @@ class AuthForm extends Component {
                       aria-label="toggle password visibility"
                       onClick={() => this.setState({ showPassword: !showPassword })}
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 ),
