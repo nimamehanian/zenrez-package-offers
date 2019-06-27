@@ -7,7 +7,13 @@ import { createMuiTheme } from '@material-ui/core';
 import Header from 'components/header/header';
 import OfferDetailsPage from 'components/offerDetailsPage/offerDetailsPage';
 
-const theme = createMuiTheme({ props: { MuiButtonBase: { disableRipple: true } } });
+const theme = createMuiTheme({
+  props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
+  },
+});
 
 function App() {
   return (

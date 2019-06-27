@@ -30,6 +30,9 @@ const AuthFormWrapper = styled.div`
   input[type="password"], input[type="passwordtext"] {
     width: 299px;
   }
+  & .MuiFormLabel-root.Mui-focused {
+    margin-top: 8px;
+  }
 `;
 
 const Title = styled.div`
