@@ -27,7 +27,7 @@ const AuthFormWrapper = styled.div`
   input[type="email"], input[type="tel"] {
     width: 343px;
   }
-  input[type="password"] {
+  input[type="password"], input[type="passwordtext"] {
     width: 299px;
   }
 `;
@@ -176,7 +176,7 @@ class AuthForm extends Component {
               {({ opacity, height, yPos }) => (
                 <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
                   <TextField
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? 'passwordtext' : 'password'}
                     name="password"
                     label="Password"
                     value={formData.password}
