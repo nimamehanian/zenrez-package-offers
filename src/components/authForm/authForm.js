@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
@@ -20,10 +21,25 @@ const AuthFormWrapper = styled.div`
     font-size: 12px;
     opacity: 0.7;
   }
+  input[type="text"] {
+    width: 164px;
+  }
+  input[type="email"], input[type="tel"] {
+    width: 343px;
+  }
+  input[type="password"] {
+    width: 299px;
+  }
 `;
 
 const Title = styled.div`
   font-size: 20px;
+`;
+
+const NameInputs = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 343px;
 `;
 
 const AuthOptions = styled.div`
@@ -97,25 +113,119 @@ class AuthForm extends Component {
         {({ studioName }) => (
           <AuthFormWrapper>
             <Title>{copy[mode].title}</Title>
-            <TextField
-              type={showPassword ? 'text' : 'password'}
-              label="Password"
-              value={formData.password}
-              onChange={this.handleChange('password')}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      aria-label="toggle password visibility"
-                      onClick={() => this.setState({ showPassword: !showPassword })}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
+            <Spring
+              native
+              to={{
+                opacity: mode === 'signup' ? 1 : 0,
+                height: mode === 'signup' ? 48 : 0,
+                yPos: mode === 'signup' ? 0 : 48,
               }}
+              config={(keys) => {
+                switch (keys) {
+                  case 'opacity':
+                    return { mass: 1, tension: 720, friction: 24 };
+                  default:
+                    return { mass: 1, tension: 360, friction: 36 };
+                }
+              }}
+            >
+              {({ opacity, height, yPos }) => (
+                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+                  <NameInputs>
+                    <TextField
+                      type="text"
+                      name="firstName"
+                      label="First Name"
+                      value={formData.firstName}
+                      onChange={this.handleChange('firstName')}
+                    />
+                    <TextField
+                      type="text"
+                      name="lastName"
+                      label="Last Name"
+                      value={formData.lastName}
+                      onChange={this.handleChange('lastName')}
+                    />
+                  </NameInputs>
+                </animated.div>
+              )}
+            </Spring>
+            <TextField
+              type="email"
+              name="email"
+              label="Email"
+              value={formData.email}
+              onChange={this.handleChange('email')}
             />
+            <Spring
+              native
+              to={{
+                opacity: mode === 'signup' || mode === 'login' ? 1 : 0,
+                height: mode === 'signup' || mode === 'login' ? 48 : 0,
+                yPos: mode === 'signup' || mode === 'login' ? 0 : -48,
+              }}
+              config={(keys) => {
+                switch (keys) {
+                  case 'opacity':
+                    return { mass: 1, tension: 720, friction: 24 };
+                  default:
+                    return { mass: 1, tension: 360, friction: 36 };
+                }
+              }}
+            >
+              {({ opacity, height, yPos }) => (
+                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+                  <TextField
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    label="Password"
+                    value={formData.password}
+                    onChange={this.handleChange('password')}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            edge="end"
+                            aria-label="toggle password visibility"
+                            onClick={() => this.setState({ showPassword: !showPassword })}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </animated.div>
+              )}
+            </Spring>
+            <Spring
+              native
+              to={{
+                opacity: mode === 'signup' ? 1 : 0,
+                height: mode === 'signup' ? 48 : 0,
+                yPos: mode === 'signup' ? 0 : -48,
+              }}
+              config={(keys) => {
+                switch (keys) {
+                  case 'opacity':
+                    return { mass: 1, tension: 720, friction: 24 };
+                  default:
+                    return { mass: 1, tension: 360, friction: 36 };
+                }
+              }}
+            >
+              {({ opacity, height, yPos }) => (
+                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+                  <TextField
+                    type="tel"
+                    name="phoneNumber"
+                    label="Phone Number"
+                    value={formData.phoneNumber}
+                    onChange={this.handleChange('phoneNumber')}
+                  />
+                </animated.div>
+              )}
+            </Spring>
             <Button
               text={copy[mode].buttonText}
               style={{ margin: '16px 0px 0px' }}
