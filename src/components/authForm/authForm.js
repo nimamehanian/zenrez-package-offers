@@ -30,7 +30,7 @@ const AuthFormWrapper = styled.div`
   input[type="password"], input[type="passwordtext"] {
     width: 299px;
   }
-  & .MuiFormLabel-root.Mui-focused {
+  & .MuiFormLabel-root.Mui-focused, .MuiFormLabel-filled {
     margin-top: 8px;
   }
 `;
