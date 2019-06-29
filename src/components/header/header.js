@@ -6,7 +6,7 @@ import { disableHighlight } from 'styles/mixins';
 import ArrowDown from 'icons/arrowDown';
 
 function Header() {
-  const { logoUrl, studioUrl } = useContext(DataContext);
+  const { logoUrl, studioUrl, colors: { primary } } = useContext(DataContext);
 
   const HeaderWrapper = styled.div`
     display: flex;
@@ -23,7 +23,7 @@ function Header() {
 
   function Dropdown() {
     const DropdownWrapper = styled.div`
-
+      position: relative;
     `;
 
     const Title = styled.div`
@@ -31,27 +31,67 @@ function Header() {
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      svg {
-        height: 19px;
+      transition: color 0.15s ease;
+      ion-icon {
         margin-left: 4px;
         position: relative;
         top: 1px;
       }
       &:hover {
         color: rgba(82, 95, 127, 0.7);
-        path {
-          fill: rgba(82, 95, 127, 0.7);
-        }
       }
       ${disableHighlight}
     `;
+
+    const Menu = styled.div`
+      position: absolute;
+      top: 18px;
+      right: 0px;
+      z-index: 9;
+      min-width: 144px;
+      min-height: 96px;
+      border-radius: 6px;
+      padding: 6px 0px;
+      box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+      background: ${$white};
+      cursor: pointer;
+    `;
+
+    const MenuItem = styled.div`
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 32px;
+      width: 216px;
+      padding: 8px 0px 8px 8px;
+      cursor: pointer;
+      text-transform: capitalize;
+      background: ${$white};
+      transition: all 0.15s ease;
+      &:hover {
+        color: ${$white};
+        background: ${primary};
+      }
+    `;
+
+    const menuItems = [
+      { text: 'my offer' },
+      { text: 'account settings' },
+      { text: 'membership & preferences' },
+      { text: 'log out' },
+    ];
 
     return (
       <DropdownWrapper>
         <Title>
           Account
-          <ArrowDown color={$text1} />
+          <ion-icon name="ios-arrow-down" />
         </Title>
+        <Menu>
+          {menuItems.map((item, idx) => (
+            <MenuItem key={`item_${idx + 1}`}>{item.text}</MenuItem>
+          ))}
+        </Menu>
       </DropdownWrapper>
     );
   }
@@ -67,3 +107,4 @@ function Header() {
 }
 
 export default Header;
+// <ArrowDown color={$text1} />
