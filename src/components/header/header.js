@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import DataContext from 'components/data';
 import { $text1, $white } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
-import ArrowDown from 'icons/arrowDown';
 
 function Header() {
   const { logoUrl, studioUrl, colors: { primary } } = useContext(DataContext);
