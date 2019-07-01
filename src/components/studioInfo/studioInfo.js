@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import DataContext from 'components/data';
+import LocationPin from 'icons/locationPin';
 
 function StudioInfo() {
   const { locations, studioDescription, colors: { primary } } = useContext(DataContext);
@@ -44,9 +45,9 @@ function StudioInfo() {
     margin-bottom: 16px;
     span {
       margin: 0px 8px 0px 4px;
-      ion-icon {
-        color: ${primary}
-      }
+      svg {
+        height: 32px;
+    }
     }
   `;
 
@@ -61,7 +62,7 @@ function StudioInfo() {
         {
           locations.map(({ studioName, studioAddress, studioCityStateZip }, idx) => (
             <LocationWrapper key={`location_${idx + 1}`}>
-              <span role="img" aria-label="location"><ion-icon name="pin" /></span>
+              <span role="img" aria-label="location"><LocationPin color={primary} /></span>
               <div>
                 <Name>{studioName}</Name>
                 <div>{studioAddress}</div>

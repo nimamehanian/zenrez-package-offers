@@ -1,6 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
 import DataContext from 'components/data';
+import ArrowDown from 'icons/arrowDown';
 import { $text1, $white } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
 
@@ -31,66 +33,89 @@ function Header() {
       align-items: center;
       cursor: pointer;
       transition: color 0.15s ease;
-      ion-icon {
+      svg {
+        height: 19px;
         margin-left: 4px;
         position: relative;
         top: 1px;
       }
       &:hover {
         color: rgba(82, 95, 127, 0.7);
+        path {
+          fill: rgba(82, 95, 127, 0.7);
+        }
       }
       ${disableHighlight}
     `;
 
-    const Menu = styled.div`
-      position: absolute;
-      top: 18px;
-      right: 0px;
-      z-index: 9;
-      min-width: 144px;
-      min-height: 96px;
-      border-radius: 6px;
-      padding: 6px 0px;
-      box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-      background: ${$white};
-      cursor: pointer;
-    `;
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const MenuItem = styled.div`
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 32px;
-      width: 216px;
-      padding: 8px 0px 8px 8px;
-      cursor: pointer;
-      text-transform: capitalize;
-      background: ${$white};
-      transition: all 0.15s ease;
-      &:hover {
-        color: ${$white};
-        background: ${primary};
-      }
-    `;
+    function Menu() {
+      const MenuWrapper = styled(animated.div)`
+        position: absolute;
+        top: 18px;
+        right: 0px;
+        z-index: 9;
+        min-width: 144px;
+        min-height: 96px;
+        border-radius: 6px;
+        padding: 6px 0px;
+        box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+        background: ${$white};
+        cursor: pointer;
+      `;
 
-    const menuItems = [
-      { text: 'my offer' },
-      { text: 'account settings' },
-      { text: 'membership & preferences' },
-      { text: 'log out' },
-    ];
+      const MenuItem = styled.div`
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 32px;
+        width: 216px;
+        padding: 8px 0px 8px 8px;
+        cursor: pointer;
+        text-transform: capitalize;
+        background: ${$white};
+        transition: all 0.15s ease;
+        &:hover {
+          color: ${$white};
+          background: ${primary};
+        }
+      `;
 
-    return (
-      <DropdownWrapper>
-        <Title>
-          Account
-          <ion-icon name="ios-arrow-down" />
-        </Title>
-        <Menu>
+      const menuItems = [
+        { text: 'my offer' },
+        { text: 'account settings' },
+        { text: 'membership & preferences' },
+        { text: 'log out' },
+      ];
+
+      const config = { mass: 1, tension: 360, friction: 36 };
+      const [{ opacity }, setOpacity] = useSpring(() => ({ opacity: 0, config }));
+
+      useEffect(() => {
+        setOpacity({ opacity: isDropdownOpen ? 1 : 0 });
+      }, [isDropdownOpen]);
+
+      return (
+        <MenuWrapper
+          style={{
+            opacity: opacity.interpolate(o => o),
+          }}
+        >
           {menuItems.map((item, idx) => (
             <MenuItem key={`item_${idx + 1}`}>{item.text}</MenuItem>
           ))}
-        </Menu>
+        </MenuWrapper>
+      );
+    }
+
+    return (
+      <DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+        <Title>
+          Account
+          <ArrowDown color={$text1} />
+        </Title>
+        <Menu />
       </DropdownWrapper>
     );
   }
@@ -106,4 +131,3 @@ function Header() {
 }
 
 export default Header;
-// <ArrowDown color={$text1} />
