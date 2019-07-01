@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
 import DataContext from 'components/data';
@@ -83,10 +84,10 @@ function Header() {
       `;
 
       const menuItems = [
-        { text: 'my offer' },
-        { text: 'account settings' },
-        { text: 'membership & preferences' },
-        { text: 'log out' },
+        { text: 'my offer', path: '/' },
+        { text: 'account settings', path: 'account' },
+        { text: 'membership & preferences', path: 'membership' },
+        { text: 'log out', path: '' },
       ];
 
       const config = { mass: 1, tension: 360, friction: 36 };
@@ -102,8 +103,10 @@ function Header() {
             opacity: opacity.interpolate(o => o),
           }}
         >
-          {menuItems.map((item, idx) => (
-            <MenuItem key={`item_${idx + 1}`}>{item.text}</MenuItem>
+          {menuItems.map(({ text, path }, idx) => (
+            <Link to={path} key={`section_${idx + 1}`}>
+              <MenuItem key={`item_${idx + 1}`}>{text}</MenuItem>
+            </Link>
           ))}
         </MenuWrapper>
       );
