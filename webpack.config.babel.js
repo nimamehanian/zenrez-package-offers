@@ -30,6 +30,7 @@ const config = {
 
   resolve: {
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       components: `${__dirname}/src/components`,
       fonts: `${__dirname}/src/fonts`,
       images: `${__dirname}/src/images`,

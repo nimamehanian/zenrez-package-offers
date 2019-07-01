@@ -1,6 +1,6 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 // import { Route, Switch } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
 import GlobalStyles from 'styles/global';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-export default hot(module)(App);
+export default hot(App);
