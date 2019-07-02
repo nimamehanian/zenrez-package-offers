@@ -118,7 +118,7 @@ function Header() {
           Account
           <ArrowDown color={$text1} />
         </Title>
-        <Menu />
+        {isDropdownOpen && <Menu />}
       </DropdownWrapper>
     );
   }
