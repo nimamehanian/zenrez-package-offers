@@ -19,7 +19,7 @@ function Membership() {
     <>
       <SectionWrapper>
         <SectionTitle>memberships</SectionTitle>
-        <div className="cards">
+        <div className="membership-cards">
           {memberships.map(({
             title,
             memberName,
