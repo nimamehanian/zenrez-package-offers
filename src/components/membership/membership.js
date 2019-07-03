@@ -12,8 +12,43 @@ import {
 } from 'components/account/accountSubcomponents';
 
 function Membership() {
-  const { memberships } = useContext(UserContext);
+  const { memberships, purchases } = useContext(UserContext);
   const SectionWrapper = styled(AccountWrapper)``;
+
+  const PurchaseTable = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+  `;
+
+  const Row = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(82, 95, 127, 0.2);
+    padding: 8px 0px;
+    color: rgba(82, 95, 127, 0.85);
+    span {
+      width: 86px;
+      padding-right: 16px;
+      &:first-child {
+        width: 80px;
+        padding-left: 2.5px;
+      }
+      &:last-child {
+        text-align: right;
+        width: 40px;
+        padding-right: 2.5px;
+      }
+    }
+  `;
+
+  const ColumnNames = styled(Row)`
+    color: rgba(82, 95, 127, 0.6);
+  `;
 
   return (
     <>
@@ -48,22 +83,27 @@ function Membership() {
 
       <SectionWrapper>
         <SectionTitle>purchases</SectionTitle>
-        <div>
-          <Card>
-            <Header>YOGA - UNLIMITED</Header>
-            <Fields>
-              <FieldGroup>
-                <Field label="Member Name" value="Nima Mehanian" />
-                <Field label="Status" value="Active (as of 4/2/19)" />
-              </FieldGroup>
-              <FieldGroup>
-                <Field label="Renewal Period" value="Monthly" />
-                <Field label="Renewal Date" value="July 9th, 2019" />
-                <Field label="Price" value="$200" />
-              </FieldGroup>
-            </Fields>
-          </Card>
-        </div>
+        <PurchaseTable>
+          <ColumnNames>
+            <span>Date</span>
+            <span>Package</span>
+            <span>Expires</span>
+            <span>Price</span>
+          </ColumnNames>
+          {purchases.map(({
+            purchaseDate,
+            packageName,
+            expirationDate,
+            price,
+          }, idx) => (
+            <Row key={`purchase_${idx + 1}`}>
+              <span>{purchaseDate}</span>
+              <span>{packageName}</span>
+              <span>{expirationDate}</span>
+              <span>{price}</span>
+            </Row>
+          ))}
+        </PurchaseTable>
       </SectionWrapper>
     </>
   );

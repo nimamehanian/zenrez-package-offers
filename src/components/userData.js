@@ -23,6 +23,32 @@ const response = {
       price: '$200',
     },
   ],
+  purchases: [
+    {
+      purchaseDate: '07/18/18',
+      packageName: '10 Classes',
+      expirationDate: '08/18/18',
+      price: '$270',
+    },
+    {
+      purchaseDate: '07/18/18',
+      packageName: '10 Classes',
+      expirationDate: '08/18/18',
+      price: '$270',
+    },
+    {
+      purchaseDate: '07/18/18',
+      packageName: '10 Classes',
+      expirationDate: '08/18/18',
+      price: '$270',
+    },
+    {
+      purchaseDate: '07/18/18',
+      packageName: '10 Classes',
+      expirationDate: '08/18/18',
+      price: '$270',
+    },
+  ],
 };
 
 const UserContext = React.createContext(response);
