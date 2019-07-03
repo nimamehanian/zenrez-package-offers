@@ -20,13 +20,14 @@ export const AccountWrapper = styled.div`
 export const SectionTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
   margin-right: 48px;
   min-width: 112px;
   display: flex;
   align-self: flex-start;
   @media (max-width: 767px) {
+    min-width: 345px;
     margin-right: 0px;
     margin-bottom: 24px;
     align-self: center;
