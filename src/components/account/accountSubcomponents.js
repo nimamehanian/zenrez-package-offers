@@ -8,7 +8,6 @@ export const AccountWrapper = styled.div`
   flex-wrap: wrap;
   background: ${$slate};
   padding-top: 48px;
-  height: calc(100vh - 120px);
   @media (max-width: 767px) {
     display: flex;
     justify-content: flex-start;
@@ -16,6 +15,7 @@ export const AccountWrapper = styled.div`
     align-items: center;
   }
 `;
+// height: calc(100vh - 120px);
 
 export const SectionTitle = styled.div`
   font-size: 16px;
@@ -23,6 +23,7 @@ export const SectionTitle = styled.div`
   letter-spacing: 0.6px;
   text-transform: uppercase;
   margin-right: 48px;
+  min-width: 112px;
   display: flex;
   align-self: flex-start;
   @media (max-width: 767px) {
