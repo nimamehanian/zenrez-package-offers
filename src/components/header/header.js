@@ -85,8 +85,8 @@ function Header() {
 
       const menuItems = [
         { text: 'my offer', path: '/' },
-        { text: 'account settings', path: 'account' },
-        { text: 'membership & preferences', path: 'membership' },
+        { text: 'profile & payment methods', path: 'account' },
+        { text: 'memberships & purchases', path: 'membership' },
         { text: 'log out', path: '' },
       ];
 
