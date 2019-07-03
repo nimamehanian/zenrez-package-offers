@@ -34,7 +34,7 @@ export const SectionTitle = styled.div`
   }
 `;
 
-export const Section = styled.div`
+export const Card = styled.div`
   background: ${$white};
   border: 1px solid rgba(82, 95, 127, 0.3);
   padding: 0px 16px 16px;

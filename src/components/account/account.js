@@ -3,7 +3,7 @@ import UserContext from 'components/userData';
 import {
   AccountWrapper,
   SectionTitle,
-  Section,
+  Card,
   Header,
   FieldGroup,
   Fields,
@@ -22,7 +22,7 @@ function Account() {
     <AccountWrapper>
       <SectionTitle>account overview</SectionTitle>
       <div>
-        <Section>
+        <Card>
           <Header>profile</Header>
           <Fields>
             <FieldGroup>
@@ -32,10 +32,10 @@ function Account() {
             <Field label="Email" value={email} />
             <Field label="Phone Number" value={phoneNumber} />
           </Fields>
-        </Section>
-        <Section>
+        </Card>
+        <Card>
           <Header>payment methods</Header>
-        </Section>
+        </Card>
       </div>
     </AccountWrapper>
   );
