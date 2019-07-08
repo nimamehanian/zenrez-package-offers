@@ -57,6 +57,11 @@ export const Header = styled.div`
 
 export const FieldGroup = styled.div`
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0px;
+  }
 `;
 
 export const Fields = styled.div`
@@ -71,7 +76,10 @@ export function Field({ label, value }) {
     justify-content: space-between;
     height: 32px;
     margin-right: 32px;
-    margin-bottom: 8px;
+    &:last-child {
+      margin-right: 0px;
+      text-align: right;
+    }
   `;
 
   const Label = styled.div`
