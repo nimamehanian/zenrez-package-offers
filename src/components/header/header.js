@@ -112,6 +112,17 @@ function Header() {
       );
     }
 
+    const DropdownScreen = styled.div`
+      background: rgba(0, 0, 0, 0);
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      z-index: 8;
+      display: ${({ isVisible }) => (isVisible ? 'block' : 'none')}
+    `;
+
     return (
       <DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <Title>
@@ -119,6 +130,10 @@ function Header() {
           <ArrowDown color={$text1} />
         </Title>
         {isDropdownOpen && <Menu />}
+        <DropdownScreen
+          isVisible={isDropdownOpen}
+          onClick={() => setIsDropdownOpen(false)}
+        />
       </DropdownWrapper>
     );
   }

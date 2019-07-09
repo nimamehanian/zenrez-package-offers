@@ -108,7 +108,7 @@ function Membership() {
                 </FieldGroup>
                 <FieldGroup>
                   <TermsBtn onClick={() => setIsTermsModalOpen(true)}>view terms</TermsBtn>
-                  <CancelBtn>cancel membership</CancelBtn>
+                  <CancelBtn onClick={() => console.log('CANCELING MEMBERSHIP')}>cancel membership</CancelBtn>
                 </FieldGroup>
               </Fields>
               <TermsModal
