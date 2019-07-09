@@ -32,6 +32,10 @@ const AuthFormWrapper = styled.div`
   }
   & .MuiFormLabel-root.Mui-focused, .MuiFormLabel-filled {
     margin-top: 8px;
+    color: ${({ primaryColor }) => primaryColor};
+  }
+  & .MuiInput-underline:after {
+    border-bottom: ${({ primaryColor }) => `2px solid ${primaryColor}`};
   }
 `;
 
@@ -113,8 +117,8 @@ class AuthForm extends Component {
 
     return (
       <DataContext.Consumer>
-        {({ studioName }) => (
-          <AuthFormWrapper>
+        {({ studioName, colors: { primary } }) => (
+          <AuthFormWrapper primaryColor={primary}>
             <Title>{copy[mode].title}</Title>
             <Spring
               native

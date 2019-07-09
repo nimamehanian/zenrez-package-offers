@@ -17,7 +17,7 @@ const offerDetails = {
   studioUrl: 'http://satoriyogastudio.com/',
   colors: {
     primary: '#63b99f',
-    secondary: '#',
+    secondary: '#d682d9',
     tertiary: '#',
   },
   locations: [

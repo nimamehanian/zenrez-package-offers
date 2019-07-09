@@ -9,15 +9,15 @@ import OfferDetailsPage from 'components/offerDetailsPage/offerDetailsPage';
 import Account from 'components/account/account';
 import Membership from 'components/membership/membership';
 
-const theme = createMuiTheme({
-  props: {
-    MuiButtonBase: {
-      disableRipple: true,
-    },
-  },
-});
-
 function App() {
+  const theme = createMuiTheme({
+    props: {
+      MuiButtonBase: {
+        disableRipple: true,
+      },
+    },
+  });
+
   return (
     <div>
       <GlobalStyles />
@@ -32,5 +32,6 @@ function App() {
     </div>
   );
 }
+
 
 export default hot(App);
