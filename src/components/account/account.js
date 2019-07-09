@@ -5,7 +5,7 @@ import {
   SectionTitle,
   Card,
   Header,
-  FieldGroup,
+  AccountFieldGroup,
   Fields,
   Field
 } from 'components/account/accountSubcomponents';
@@ -25,12 +25,16 @@ function Account() {
         <Card>
           <Header>profile</Header>
           <Fields>
-            <FieldGroup>
+            <AccountFieldGroup>
               <Field label="First Name" value={firstName} />
               <Field label="Last Name" value={lastName} />
-            </FieldGroup>
-            <Field label="Email" value={email} />
-            <Field label="Phone Number" value={phoneNumber} />
+            </AccountFieldGroup>
+            <AccountFieldGroup>
+              <Field label="Email" value={email} isOnlyFieldInGroup />
+            </AccountFieldGroup>
+            <AccountFieldGroup>
+              <Field label="Phone Number" value={phoneNumber} isOnlyFieldInGroup />
+            </AccountFieldGroup>
           </Fields>
         </Card>
         <Card>

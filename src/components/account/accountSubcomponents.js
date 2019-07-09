@@ -64,12 +64,16 @@ export const FieldGroup = styled.div`
   }
 `;
 
+export const AccountFieldGroup = styled(FieldGroup)`
+  justify-content: flex-start;
+`;
+
 export const Fields = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export function Field({ label, value }) {
+export function Field({ label, value, isOnlyFieldInGroup }) {
   const FieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -78,7 +82,7 @@ export function Field({ label, value }) {
     margin-right: 32px;
     &:last-child {
       margin-right: 0px;
-      text-align: right;
+      text-align: ${isOnlyFieldInGroup ? 'left' : 'right'};
     }
   `;
 
