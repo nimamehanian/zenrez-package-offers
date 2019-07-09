@@ -15,6 +15,8 @@ export const $green2 = '#5daf96';
 export const $green3 = '#5eb098';
 export const $green4 = '#45816f';
 //
+export const $blue = '#45b2e8';
+//
 export const $white = '#ffffff';
 export const $white70 = '#d1e8e0';
 //
