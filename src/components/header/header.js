@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import DataContext from 'components/data';
 import ArrowDown from 'icons/arrowDown';
 import { $text1, $white } from 'styles/colors';
-import { disableHighlight } from 'styles/mixins';
+import { Backdrop, disableHighlight } from 'styles/mixins';
 
 function Header() {
   const { logoUrl, studioUrl, colors: { primary } } = useContext(DataContext);
@@ -112,17 +112,6 @@ function Header() {
       );
     }
 
-    const DropdownScreen = styled.div`
-      background: rgba(0, 0, 0, 0);
-      position: fixed;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-      z-index: 8;
-      display: ${({ isVisible }) => (isVisible ? 'block' : 'none')}
-    `;
-
     return (
       <DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <Title>
@@ -130,8 +119,8 @@ function Header() {
           <ArrowDown color={$text1} />
         </Title>
         {isDropdownOpen && <Menu />}
-        <DropdownScreen
-          isVisible={isDropdownOpen}
+        <Backdrop
+          isRendered={isDropdownOpen}
           onClick={() => setIsDropdownOpen(false)}
         />
       </DropdownWrapper>

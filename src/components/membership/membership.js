@@ -11,13 +11,17 @@ import {
   FieldGroup,
   Field
 } from 'components/account/accountSubcomponents';
-import Dialog from '@material-ui/core/Dialog';
+import {
+  TermsField
+} from 'components/membership/membershipSubcomponents';
 import { $blue, $text1 } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
 
 function Membership() {
   const { memberships, purchases } = useContext(UserContext);
-  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const [areTermsShown, setAreTermsShown] = useState(false);
+  const [isCancelTooltipOpen, setIsCancelTooltipOpen] = useState(false);
+
   const SectionWrapper = styled(AccountWrapper)``;
 
   const PurchaseTable = styled.div`
@@ -80,6 +84,12 @@ function Membership() {
     }
   `;
 
+  // params: event, id
+  function handleCancel() {
+    // console.log(id, event.target);
+    setIsCancelTooltipOpen(!isCancelTooltipOpen);
+  }
+
   return (
     <>
       <SectionWrapper>
@@ -107,15 +117,15 @@ function Membership() {
                   <Field label="Price" value={price} />
                 </FieldGroup>
                 <FieldGroup>
-                  <TermsBtn onClick={() => setIsTermsModalOpen(true)}>view terms</TermsBtn>
-                  <CancelBtn onClick={() => console.log('CANCELING MEMBERSHIP')}>cancel membership</CancelBtn>
+                  <TermsBtn onClick={() => setAreTermsShown(!areTermsShown)}>
+                    {areTermsShown ? 'hide terms' : 'view terms'}
+                  </TermsBtn>
+                  <CancelBtn onClick={event => handleCancel(event, idx)}>
+                    cancel membership
+                  </CancelBtn>
                 </FieldGroup>
               </Fields>
-              <TermsModal
-                terms={terms}
-                open={isTermsModalOpen}
-                onClose={() => setIsTermsModalOpen(false)}
-              />
+              <TermsField terms={terms} areTermsShown={areTermsShown} />
             </Card>
           ))}
         </div>
@@ -146,37 +156,6 @@ function Membership() {
         </PurchaseTable>
       </SectionWrapper>
     </>
-  );
-}
-
-function TermsModal({ terms, open, onClose }) {
-  const TermsWrapper = styled.div`
-    max-height: calc(100vh * 0.618);
-    margin: 16px;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(82, 95, 127, 0.2);
-    overflow: scroll;
-  `;
-
-  const TermsSection = styled.div`
-    margin: 24px 0px;
-    &:first-child {
-      margin-top: 0px;
-    }
-    &:last-child {
-      margin-bottom: 0px;
-    }
-  `;
-
-  return (
-    <Dialog open={open} onClose={onClose}>
-      <TermsWrapper>
-        {terms.split('\n').filter(chunk => !!chunk).map((section, idx) => (
-          <TermsSection key={`section_${idx + 1}`}>{section}</TermsSection>
-        ))}
-      </TermsWrapper>
-    </Dialog>
   );
 }
 

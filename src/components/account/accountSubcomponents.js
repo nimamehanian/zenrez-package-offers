@@ -40,7 +40,7 @@ export const Card = styled.div`
   padding: 0px 16px 16px;
   margin-bottom: 32px;
   width: 311px;
-  max-height: 240px;
+  position: relative;
 `;
 
 export const Header = styled.div`
