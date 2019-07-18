@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import UserContext from 'components/userData';
 import {
   AccountWrapper,
+  AccountCard,
   SectionTitle,
-  Card,
   Header,
   AccountFieldGroup,
   Fields,
@@ -22,7 +22,7 @@ function Account() {
     <AccountWrapper>
       <SectionTitle>account overview</SectionTitle>
       <div>
-        <Card>
+        <AccountCard>
           <Header>profile</Header>
           <Fields>
             <AccountFieldGroup>
@@ -36,10 +36,10 @@ function Account() {
               <Field label="Phone Number" value={phoneNumber} isOnlyFieldInGroup />
             </AccountFieldGroup>
           </Fields>
-        </Card>
-        <Card>
+        </AccountCard>
+        <AccountCard>
           <Header>payment methods</Header>
-        </Card>
+        </AccountCard>
       </div>
     </AccountWrapper>
   );

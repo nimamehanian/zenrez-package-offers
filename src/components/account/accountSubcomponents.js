@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { $slate, $text1, $white } from 'styles/colors';
+import {
+  $slate,
+  $text1,
+  $white
+} from 'styles/colors';
 
 export const AccountWrapper = styled.div`
   display: flex;
@@ -17,6 +21,15 @@ export const AccountWrapper = styled.div`
 `;
 // height: calc(100vh - 120px);
 
+export const AccountCard = styled.div`
+  background: ${$white};
+  border: 1px solid rgba(82, 95, 127, 0.3);
+  padding: 0px 16px 16px;
+  margin-bottom: 32px;
+  width: 311px;
+  position: relative;
+`;
+
 export const SectionTitle = styled.div`
   font-size: 16px;
   font-weight: bold;
@@ -32,15 +45,6 @@ export const SectionTitle = styled.div`
     margin-bottom: 24px;
     align-self: center;
   }
-`;
-
-export const Card = styled.div`
-  background: ${$white};
-  border: 1px solid rgba(82, 95, 127, 0.3);
-  padding: 0px 16px 16px;
-  margin-bottom: 32px;
-  width: 311px;
-  position: relative;
 `;
 
 export const Header = styled.div`

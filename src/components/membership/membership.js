@@ -1,26 +1,12 @@
-import React, { useState, useContext } from 'react';
-// import { useSpring } from 'react-spring';
+import React, { useContext } from 'react';
 import UserContext from 'components/userData';
 import styled from 'styled-components';
-import {
-  AccountWrapper,
-  SectionTitle,
-  Card,
-  Header,
-  Fields,
-  FieldGroup,
-  Field
-} from 'components/account/accountSubcomponents';
-import {
-  TermsField
-} from 'components/membership/membershipSubcomponents';
-import { $blue, $text1 } from 'styles/colors';
-import { disableHighlight } from 'styles/mixins';
+import { AccountWrapper, SectionTitle } from 'components/account/accountSubcomponents';
+import { MembershipCard } from 'components/membership/membershipSubcomponents';
 
 function Membership() {
   const { memberships, purchases } = useContext(UserContext);
-  const [areTermsShown, setAreTermsShown] = useState(false);
-  const [isCancelTooltipOpen, setIsCancelTooltipOpen] = useState(false);
+  // const [isCancelTooltipOpen, setIsCancelTooltipOpen] = useState(false);
 
   const SectionWrapper = styled(AccountWrapper)``;
 
@@ -59,37 +45,6 @@ function Membership() {
     color: rgba(82, 95, 127, 0.6);
   `;
 
-  const CancelBtn = styled.div`
-    color: ${$blue};
-    letter-spacing: 0.6px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.15s ease;
-    padding: 6px;
-    border-radius: 4px;
-    ${disableHighlight}
-    &:hover {
-      background: rgba(69, 178, 232, 0.1);
-    }
-  `;
-
-  const TermsBtn = styled(CancelBtn)`
-    color: ${$text1};
-    display: flex;
-    justify-content: space-between;
-    &:hover {
-      background: rgba(82, 95, 127, 0.1);
-    }
-  `;
-
-  // params: event, id
-  function handleCancel() {
-    // console.log(id, event.target);
-    setIsCancelTooltipOpen(!isCancelTooltipOpen);
-  }
-
   return (
     <>
       <SectionWrapper>
@@ -104,29 +59,17 @@ function Membership() {
             price,
             terms,
           }, idx) => (
-            <Card key={`membership_card_${idx + 1}`}>
-              <Header>{title}</Header>
-              <Fields>
-                <FieldGroup>
-                  <Field label="Member Name" value={memberName} />
-                  <Field label="Status" value={status} />
-                </FieldGroup>
-                <FieldGroup>
-                  <Field label="Renewal Period" value={renewalPeriod} />
-                  <Field label="Renewal Date" value={renewalDate} />
-                  <Field label="Price" value={price} />
-                </FieldGroup>
-                <FieldGroup>
-                  <TermsBtn onClick={() => setAreTermsShown(!areTermsShown)}>
-                    {areTermsShown ? 'hide terms' : 'view terms'}
-                  </TermsBtn>
-                  <CancelBtn onClick={event => handleCancel(event, idx)}>
-                    cancel membership
-                  </CancelBtn>
-                </FieldGroup>
-              </Fields>
-              <TermsField terms={terms} areTermsShown={areTermsShown} />
-            </Card>
+            <MembershipCard
+              key={`membership_card_${idx + 1}`}
+              idx={idx}
+              title={title}
+              memberName={memberName}
+              status={status}
+              renewalPeriod={renewalPeriod}
+              renewalDate={renewalDate}
+              price={price}
+              terms={terms}
+            />
           ))}
         </div>
       </SectionWrapper>
