@@ -33,7 +33,7 @@
     "start": "yarn run build && webpack-dev-server",
     "test": "jest",
     "test:watch": "yarn run test -- --watch",
-    "deploy": "NODE_ENV=production && yarn build && firebase deploy"
+    "deploy": "NODE_ENV=production yarn build && firebase deploy"
   },
   "dependencies": {
     "@hot-loader/react-dom": "16.8.6",
