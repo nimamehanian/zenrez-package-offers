@@ -20,12 +20,14 @@ function Header() {
     padding: 0px 24px;
     img {
       height: 38px;
+      ${disableHighlight}
     }
   `;
 
   function Dropdown() {
     const DropdownWrapper = styled.div`
       position: relative;
+      ${disableHighlight}
     `;
 
     const Title = styled.div`
@@ -46,7 +48,6 @@ function Header() {
           fill: rgba(82, 95, 127, 0.7);
         }
       }
-      ${disableHighlight}
     `;
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

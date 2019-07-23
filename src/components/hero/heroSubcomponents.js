@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { $text1, $white } from 'styles/colors';
 import Button from 'components/button/button';
 import DataContext from 'components/data';
+import { disableHighlight } from 'styles/mixins';
 
 export function PricingInfo({
   isPaymentFieldVisible,
@@ -173,17 +174,16 @@ export function MobileBadge() {
     font-size: 16px;
     line-height: 1;
     position: absolute;
-
     top: 24px;
     right: 24px;
     @media (min-width: 768px) {
       display: none;
     }
-
     div {
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+    ${disableHighlight}
   `;
 
   return (
@@ -219,6 +219,7 @@ function Badge() {
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+    ${disableHighlight}
   `;
 
   return (
