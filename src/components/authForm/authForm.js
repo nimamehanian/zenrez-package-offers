@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { InputAdornment, IconButton } from '@material-ui/core';
 import Button from 'components/button/button';
 import { $slate } from 'styles/colors';
+import { disableHighlight } from 'styles/mixins';
 import DataContext from 'components/data';
-import { InputAdornment, IconButton } from '@material-ui/core';
 
 const AuthFormWrapper = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ const AuthOptions = styled.div`
   font-size: 14px;
   text-align: center;
   margin-top: 8px;
+  ${disableHighlight}
   div {
     line-height: 2;
   }
