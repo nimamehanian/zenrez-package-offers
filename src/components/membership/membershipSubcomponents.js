@@ -9,8 +9,7 @@ import {
 } from 'components/account/accountSubcomponents';
 import {
   $white,
-  $blue,
-  $text1
+  $blue
 } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
 
@@ -52,31 +51,6 @@ export class MembershipCard extends Component {
       position: relative;
     `;
 
-    const CancelBtn = styled.div`
-      color: ${$blue};
-      letter-spacing: 0.6px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.15s ease;
-      padding: 6px;
-      border-radius: 4px;
-      ${disableHighlight}
-      &:hover {
-        background: rgba(69, 178, 232, 0.1);
-      }
-    `;
-
-    const TermsBtn = styled(CancelBtn)`
-      color: ${$text1};
-      display: flex;
-      justify-content: space-between;
-      &:hover {
-        background: rgba(82, 95, 127, 0.1);
-      }
-    `;
-
     return (
       <CardWrapper>
         <Header>{title}</Header>
@@ -91,12 +65,12 @@ export class MembershipCard extends Component {
             <Field label="Price" value={price} />
           </FieldGroup>
           <FieldGroup>
-            <TermsBtn onClick={() => this.setState({ areTermsShown: !areTermsShown })}>
+            <SecondaryBtn onClick={() => this.setState({ areTermsShown: !areTermsShown })}>
               {areTermsShown ? 'hide terms' : 'view terms'}
-            </TermsBtn>
-            <CancelBtn onClick={event => this.handleCancel(event, idx)}>
+            </SecondaryBtn>
+            <ActionBtn onClick={event => this.handleCancel(event, idx)}>
               cancel membership
-            </CancelBtn>
+            </ActionBtn>
           </FieldGroup>
         </Fields>
         <TermsField terms={terms} areTermsShown={areTermsShown} />
@@ -104,6 +78,30 @@ export class MembershipCard extends Component {
     );
   }
 }
+
+export const ActionBtn = styled.div`
+  letter-spacing: 0.6px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 6px;
+  border-radius: 4px;
+  ${disableHighlight}
+  color: ${$blue};
+  &:hover {
+    background: rgba(69, 178, 232, 0.1);
+  }
+`;
+
+export const SecondaryBtn = styled(ActionBtn)`
+  color: rgba(82, 95, 127, 0.8);
+  &:hover {
+    color: rgba(82, 95, 127, 1);
+    background: rgba(82, 95, 127, 0.1);
+  }
+`;
 
 export class TermsField extends Component {
   constructor(props) {
@@ -175,6 +173,7 @@ export class TermsField extends Component {
   }
 }
 
+// !KEEP!
 // export function ConfirmCancellation({ isVisible, isCancelTooltipOpen, setIsCancelTooltipOpen }) {
 //   const ConfirmCancellationWrapper = styled.div`
 //     display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
@@ -242,5 +241,3 @@ export class TermsField extends Component {
 //     </ConfirmCancellationWrapper>
 //   );
 // }
-
-export const test = 'test';

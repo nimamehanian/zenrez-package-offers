@@ -1,6 +1,8 @@
 export const $cream = '#fdfdfd';
 export const $dust = '#a9a9a9';
 export const $sunset = '#985e6d';
+export const $highlight = '#ffae6b';
+export const $lightPurple = '#f6d4f4';
 //
 export const $text1 = '#525f7f';
 //

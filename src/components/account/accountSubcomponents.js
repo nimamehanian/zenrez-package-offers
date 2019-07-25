@@ -1,4 +1,5 @@
 import React from 'react';
+import { animated } from 'react-spring';
 import styled from 'styled-components';
 import {
   $slate,
@@ -21,7 +22,7 @@ export const AccountWrapper = styled.div`
 `;
 // height: calc(100vh - 120px);
 
-export const AccountCard = styled.div`
+export const AccountCard = styled(animated.div)`
   background: ${$white};
   border: 1px solid rgba(82, 95, 127, 0.3);
   padding: 0px 16px 16px;

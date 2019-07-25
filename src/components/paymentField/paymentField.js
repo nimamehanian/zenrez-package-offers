@@ -1,10 +1,10 @@
 import React, { useContext, Component } from 'react';
+import { Elements, injectStripe, CardElement } from 'react-stripe-elements';
 import styled from 'styled-components';
-import { Elements, CardElement, injectStripe } from 'react-stripe-elements';
-import { $text1 } from 'styles/colors';
 import Button from 'components/button/button';
 import Checkbox from '@material-ui/core/Checkbox';
 import DataContext from 'components/data';
+import { $text1 } from 'styles/colors';
 
 function PaymentField({ setIsPaymentFieldVisible }) {
   const { discount, retailPrice, tax } = useContext(DataContext);
@@ -33,6 +33,12 @@ function PaymentField({ setIsPaymentFieldVisible }) {
     justify-content: space-between;
   `;
 
+  const CardWrapper = styled.div`
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(82, 95, 127, 0.2);
+  `;
+
   const Cost = styled(CCInfo)``;
 
   const SaveCard = styled.div`
@@ -45,12 +51,6 @@ function PaymentField({ setIsPaymentFieldVisible }) {
     font-family: 'Apercu Med';
     text-transform: uppercase;
     margin-bottom: 8px;
-  `;
-
-  const CardWrapper = styled.div`
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid rgba(82, 95, 127, 0.2);
   `;
 
   const Items = styled.div`
@@ -87,7 +87,11 @@ function PaymentField({ setIsPaymentFieldVisible }) {
         isCardSaved: true,
         isCardValid: false,
       };
-      this.chargeCard = this.chargeCard.bind(this);
+      this.setIsCardValid = this.setIsCardValid.bind(this);
+    }
+
+    setIsCardValid(isCompleteAndErrorFree) {
+      this.setState({ isCardValid: isCompleteAndErrorFree });
     }
 
     async chargeCard(event) {
@@ -106,9 +110,7 @@ function PaymentField({ setIsPaymentFieldVisible }) {
               <Title>payment</Title>
               <CardWrapper>
                 <CardElement
-                  onChange={({ complete, error }) => (
-                    this.setState({ isCardValid: complete && !error })
-                  )}
+                  onChange={({ complete, error }) => this.setIsCardValid(complete && !error)}
                   style={{
                     base: {
                       fontSize: '16px',
