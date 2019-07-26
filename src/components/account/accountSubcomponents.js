@@ -1,5 +1,5 @@
 import React from 'react';
-import { animated } from 'react-spring';
+import { animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import {
   $slate,
