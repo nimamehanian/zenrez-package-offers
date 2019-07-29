@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Elements, CardElement } from 'react-stripe-elements';
+import { Elements, injectStripe } from 'react-stripe-elements';
 import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import UserContext from 'components/userData';
@@ -11,13 +11,16 @@ import {
   AccountFieldGroup,
   Fields,
   FieldGroup,
-  Field
+  Field,
+  CardInput
 } from 'components/account/accountSubcomponents';
 import {
   ActionBtn,
   SecondaryBtn
 } from 'components/membership/membershipSubcomponents';
-import { $text1, $blue } from 'styles/colors';
+import { $blue } from 'styles/colors';
+
+const StripeCardInput = injectStripe(CardInput);
 
 const PaymentFieldWrapper = styled.div`
   display: flex;
@@ -48,6 +51,7 @@ class Account extends Component {
       isCardValid: false,
     };
     this.setIsPaymentFieldVisible = this.setIsPaymentFieldVisible.bind(this);
+    this.setIsCardValid = this.setIsCardValid.bind(this);
     this.saveCard = this.saveCard.bind(this);
     this.stripeCardInput = createRef();
   }
@@ -58,9 +62,15 @@ class Account extends Component {
     this.setState({ isPaymentFieldVisible });
   }
 
+  setIsCardValid(isCardValid) {
+    this.setState({ isCardValid });
+  }
+
   async saveCard(event) {
     event.preventDefault();
-    console.log(event);
+    const { stripe } = this.state;
+    const response = await stripe.createToken();
+    console.log(response.token);
   }
 
   render() {
@@ -120,22 +130,11 @@ class Account extends Component {
                                 willChange: 'transform, opacity',
                               }}
                             >
-                              <CardElement
-                                ref={this.stripeCardInput}
-                                onChange={({ complete, error }) => (
-                                  this.setState({ isCardValid: complete && !error })
-                                )}
-                                hideIcon={!isPaymentFieldVisible}
-                                hidePostalCode
-                                style={{
-                                  base: {
-                                    fontSize: '14px',
-                                    color: !isPaymentFieldVisible ? '#fff' : $text1,
-                                    '::placeholder': {
-                                      color: !isPaymentFieldVisible ? '#fff' : $text1,
-                                    },
-                                  },
-                                }}
+                              <StripeCardInput
+                                isPaymentFieldVisible={isPaymentFieldVisible}
+                                inputRef={this.stripeCardInput}
+                                setIsCardValid={this.setIsCardValid}
+                                addToParent={(key, val) => { this.setState({ [key]: val }); }}
                               />
                             </CardWrapper>
                           </Elements>

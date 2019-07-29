@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { CardElement } from 'react-stripe-elements';
 import { animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import {
@@ -107,4 +108,31 @@ export function Field({ label, value, isOnlyFieldInGroup }) {
       <Value>{value}</Value>
     </FieldWrapper>
   );
+}
+export class CardInput extends Component {
+  componentDidMount() {
+    const { addToParent, stripe } = this.props;
+    addToParent('stripe', stripe);
+  }
+
+  render() {
+    const { isPaymentFieldVisible, inputRef, setIsCardValid } = this.props;
+    return (
+      <CardElement
+        ref={inputRef}
+        onChange={({ complete, error }) => setIsCardValid(complete && !error)}
+        hideIcon={!isPaymentFieldVisible}
+        hidePostalCode
+        style={{
+          base: {
+            fontSize: '14px',
+            color: !isPaymentFieldVisible ? '#fff' : $text1,
+            '::placeholder': {
+              color: !isPaymentFieldVisible ? '#fff' : $text1,
+            },
+          },
+        }}
+      />
+    );
+  }
 }
