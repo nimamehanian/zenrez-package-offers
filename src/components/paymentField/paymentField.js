@@ -88,6 +88,7 @@ function PaymentField({ setIsPaymentFieldVisible }) {
         isCardValid: false,
       };
       this.setIsCardValid = this.setIsCardValid.bind(this);
+      this.chargeCard = this.chargeCard.bind(this);
     }
 
     setIsCardValid(isCompleteAndErrorFree) {
@@ -98,7 +99,7 @@ function PaymentField({ setIsPaymentFieldVisible }) {
       event.preventDefault();
       const { stripe } = this.props;
       const response = await stripe.createToken();
-      console.log(response);
+      console.log(response.token);
     }
 
     render() {
