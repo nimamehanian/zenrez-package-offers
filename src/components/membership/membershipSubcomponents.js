@@ -18,13 +18,21 @@ export class MembershipCard extends Component {
     super(props);
     this.state = {
       areTermsShown: false,
+      isCancelTooltipVisible: false,
     };
+    this.setIsCancelTooltipVisible = this.setIsCancelTooltipVisible.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  setIsCancelTooltipVisible(isCancelTooltipVisible) {
+    this.setState({ isCancelTooltipVisible });
   }
 
   // params: event, id
   handleCancel() {
     console.log('CANCEL MEMBERSHIP');
+    this.setIsCancelTooltipVisible(true);
+    this.setState({ areTermsShown: false });
     // console.log(id, event.target);
   }
 
@@ -40,7 +48,7 @@ export class MembershipCard extends Component {
       terms,
     } = this.props;
 
-    const { areTermsShown } = this.state;
+    const { areTermsShown, isCancelTooltipVisible } = this.state;
 
     const CardWrapper = styled.div`
       background: ${$white};
@@ -74,6 +82,10 @@ export class MembershipCard extends Component {
           </FieldGroup>
         </Fields>
         <TermsField terms={terms} areTermsShown={areTermsShown} />
+        <ConfirmCancellation
+          isCancelTooltipVisible={isCancelTooltipVisible}
+          setIsCancelTooltipVisible={this.setIsCancelTooltipVisible}
+        />
       </CardWrapper>
     );
   }
@@ -173,71 +185,85 @@ export class TermsField extends Component {
   }
 }
 
-// !KEEP!
-// export function ConfirmCancellation({ isVisible, isCancelTooltipOpen, setIsCancelTooltipOpen }) {
-//   const ConfirmCancellationWrapper = styled.div`
-//     display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: space-between;
-//     border-radius: 6px;
-//     box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
-//     font-size: 14px;
-//     padding: 16px;
-//     background: #fff;
-//     position: absolute;
-//     bottom: -80px;
-//     right: 8px;
-//     z-index: 9;
-//   `;
+export function ConfirmCancellation({ isCancelTooltipVisible, setIsCancelTooltipVisible }) {
+  const ConfirmCancellationWrapper = styled.div`
+    display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    box-shadow: 0px 4px 6px rgba(50, 50, 93, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    padding: 16px;
+    background: #fff;
+    position: absolute;
+    bottom: -80px;
+    right: 8px;
+    z-index: 9;
+  `;
 
-//   const Prompt = styled.div`
-//     margin-bottom: 8px;
-//   `;
+  const Backdrop = styled.div`
+    background: rgba(0, 0, 0, 0);
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 8;
+    display: ${({ isRendered }) => (isRendered ? 'block' : 'none')}
+  `;
 
-//   const Options = styled.div`
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-around;
-//     width: 80%;
-//   `;
+  const Prompt = styled.div`
+    margin-bottom: 8px;
+    ${disableHighlight}
+  `;
 
-//   const TooltipButton = styled.div`
-//     font-size: 14px;
-//     border: 1px solid rgba(82, 95, 127, 0.5);
-//     border-radius: 16px;
-//     padding: 6px 16px;
-//     cursor: pointer;
-//     font-family: 'Apercu Med';
-//     ${disableHighlight}
-//   `;
+  const Options = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+  `;
 
-//   const No = styled(TooltipButton)`
-//     color: color: rgba(82, 95, 127, 0.9);
-//     background: #fff;
-//   `;
+  const TooltipButton = styled.div`
+    font-size: 14px;
+    border: 1px solid rgba(82, 95, 127, 0.5);
+    border-radius: 16px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-family: 'Apercu Med';
+    ${disableHighlight}
+  `;
 
-//   const Yes = styled(TooltipButton)`
-//     border: none;
-//     color: #fff;
-//     background: #e01e5a;
-//   `;
+  const No = styled(TooltipButton)`
+    color: color: rgba(82, 95, 127, 0.9);
+    background: #fff;
+  `;
 
-//   return (
-//     <ConfirmCancellationWrapper isVisible={isVisible}>
-//       <Prompt>Do you really want to cancel this membership?</Prompt>
-//       <Options>
-//         <No onClick={() => setIsCancelTooltipOpen(false)}>Nevermind</No>
-// <Yes
-//   onClick={() => console.log('EMIT: { type: `CANCEL_MEMBERSHIP` }, && CLOSE_TOOLTIP ')}
-// >
-//   Yes, Cancel
-// </Yes>
-//       </Options>
-//       <Backdrop
-//         isRendered={isCancelTooltipOpen}
-//         onClick={() => setIsCancelTooltipOpen(false)}
-//       />
-//     </ConfirmCancellationWrapper>
-//   );
-// }
+  const Yes = styled(TooltipButton)`
+    border: none;
+    color: #fff;
+    background: #e01e5a;
+  `;
+
+  // Backdrop must be defined within this component so z-index scope applies
+  return (
+    <>
+      <ConfirmCancellationWrapper isVisible={isCancelTooltipVisible}>
+        <Prompt>Do you really want to cancel this membership?</Prompt>
+        <Options>
+          <No onClick={() => setIsCancelTooltipVisible(false)}>Nevermind</No>
+          <Yes
+            onClick={() => console.log('EMIT: { type: `CANCEL_MEMBERSHIP` }, && CLOSE_TOOLTIP ')}
+          >
+            Yes, Cancel
+          </Yes>
+        </Options>
+      </ConfirmCancellationWrapper>
+      <Backdrop
+        isRendered={isCancelTooltipVisible}
+        onClick={() => setIsCancelTooltipVisible(false)}
+      />
+    </>
+  );
+}
