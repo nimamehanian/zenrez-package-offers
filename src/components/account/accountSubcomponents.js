@@ -7,6 +7,7 @@ import {
   $text1,
   $white
 } from 'styles/colors';
+import { disableHighlight } from 'styles/mixins';
 
 export const AccountWrapper = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ export const AccountCard = styled(animated.div)`
   margin-bottom: 32px;
   width: 311px;
   position: relative;
+  ${disableHighlight};
 `;
 
 export const SectionTitle = styled.div`

@@ -112,6 +112,7 @@ function PaymentField({ setIsPaymentFieldVisible }) {
               <CardWrapper>
                 <CardElement
                   onChange={({ complete, error }) => this.setIsCardValid(complete && !error)}
+                  hidePostalCode
                   style={{
                     base: {
                       fontSize: '16px',
