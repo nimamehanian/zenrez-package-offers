@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Spring, animated } from 'react-spring/renderprops';
+import { useSpring, animated as a } from 'react-spring';
 import styled from 'styled-components';
 import {
   Header,
@@ -28,12 +29,10 @@ export class MembershipCard extends Component {
     this.setState({ isCancelTooltipVisible });
   }
 
-  // params: event, id
   handleCancel() {
     console.log('CANCEL MEMBERSHIP');
     this.setIsCancelTooltipVisible(true);
     this.setState({ areTermsShown: false });
-    // console.log(id, event.target);
   }
 
   render() {
@@ -57,6 +56,7 @@ export class MembershipCard extends Component {
       margin-bottom: 32px;
       width: 311px;
       position: relative;
+      ${disableHighlight}
     `;
 
     return (
@@ -186,8 +186,7 @@ export class TermsField extends Component {
 }
 
 export function ConfirmCancellation({ isCancelTooltipVisible, setIsCancelTooltipVisible }) {
-  const ConfirmCancellationWrapper = styled.div`
-    display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
+  const ConfirmCancellationWrapper = styled(a.div)`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -197,7 +196,7 @@ export function ConfirmCancellation({ isCancelTooltipVisible, setIsCancelTooltip
     padding: 16px;
     background: #fff;
     position: absolute;
-    bottom: -80px;
+    bottom: 50px;
     right: 8px;
     z-index: 9;
   `;
@@ -246,10 +245,25 @@ export function ConfirmCancellation({ isCancelTooltipVisible, setIsCancelTooltip
     background: #e01e5a;
   `;
 
-  // Backdrop must be defined within this component so z-index scope applies
+  const config = { mass: 1, tension: 400, friction: 32 };
+  const [{ opacity }, setOpacity] = useSpring(() => ({ opacity: 0, config }));
+  const [{ offsetY }, setOffsetY] = useSpring(() => ({ offsetY: 16, config }));
+
+  useEffect(() => {
+    setOpacity({ opacity: isCancelTooltipVisible ? 1 : 0 });
+    setOffsetY({ offsetY: isCancelTooltipVisible ? 0 : 16 });
+  }, [isCancelTooltipVisible]);
+
+  // <Backdrop> must be defined within this component so z-index scope applies
   return (
     <>
-      <ConfirmCancellationWrapper isVisible={isCancelTooltipVisible}>
+      <ConfirmCancellationWrapper
+        style={{
+          opacity,
+          transform: offsetY.interpolate(y => `translateY(${y}px)`),
+          display: isCancelTooltipVisible ? 'flex' : 'none',
+        }}
+      >
         <Prompt>Do you really want to cancel this membership?</Prompt>
         <Options>
           <No onClick={() => setIsCancelTooltipVisible(false)}>Nevermind</No>

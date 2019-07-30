@@ -6,7 +6,6 @@ import { MembershipCard } from 'components/membership/membershipSubcomponents';
 
 function Membership() {
   const { memberships, purchases } = useContext(UserContext);
-  // const [isCancelTooltipOpen, setIsCancelTooltipOpen] = useState(false);
 
   const SectionWrapper = styled(AccountWrapper)``;
 
