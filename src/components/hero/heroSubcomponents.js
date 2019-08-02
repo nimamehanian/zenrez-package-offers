@@ -3,7 +3,7 @@ import { useTrail, animated } from 'react-spring';
 import styled from 'styled-components';
 import { $text1, $white } from 'styles/colors';
 import Button from 'components/button/button';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 import { disableHighlight } from 'styles/mixins';
 
 export function PricingInfo({

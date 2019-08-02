@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 import LocationPin from 'icons/locationPin';
 
 function StudioInfo() {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { $grey3, $white } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 
 function Button({
   text,

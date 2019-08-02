@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 import ArrowDown from 'icons/arrowDown';
 import { $text1, $white } from 'styles/colors';
 import { Backdrop, disableHighlight } from 'styles/mixins';

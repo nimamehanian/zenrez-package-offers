@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { $text1 } from 'styles/colors';
 import useInterval from 'utils/useInterval';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 
 export function MobileOfferExpirationTimer() {
   const { dateOfExpiration } = useContext(DataContext);

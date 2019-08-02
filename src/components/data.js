@@ -1,6 +1,6 @@
 import React from 'react';
 
-const offerDetails = {
+export const offerDetails = {
   logoUrl: 'https://res.cloudinary.com/zenrez/image/upload/v1531503228/perfect-fit/5899119cc7bec43e37f534e7/v1q5vltkjh1xf4exatxk.png',
   imageUrl: 'https://images.unsplash.com/photo-1519317245869-d6943e4a4f9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
   classTitle: 'yoga',
@@ -19,21 +19,22 @@ const offerDetails = {
     primary: '#63b99f',
     secondary: '#d682d9',
     tertiary: '#',
+    __typename: 'Theme',
   },
   locations: [
     {
       studioName: 'Satori Yoga Studio',
       studioAddress: '110 Sutter St Ste 100',
       studioCityStateZip: 'San Francisco, CA 94104',
+      __typename: 'Location',
     },
     {
       studioName: 'Satori Yoga Studio',
       studioAddress: '110 Sutter St Ste 100',
       studioCityStateZip: 'San Francisco, CA 94104',
+      __typename: 'Location',
     },
   ],
 };
 
-const DataContext = React.createContext(offerDetails);
-
-export default DataContext;
+export const DataContext = React.createContext(offerDetails);

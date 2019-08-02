@@ -3,7 +3,7 @@ import { Elements, injectStripe, CardElement } from 'react-stripe-elements';
 import styled from 'styled-components';
 import Button from 'components/button/button';
 import Checkbox from '@material-ui/core/Checkbox';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 import { $text1 } from 'styles/colors';
 
 function PaymentField({ setIsPaymentFieldVisible }) {

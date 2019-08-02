@@ -8,7 +8,7 @@ import { InputAdornment, IconButton } from '@material-ui/core';
 import Button from 'components/button/button';
 import { $slate } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
-import DataContext from 'components/data';
+import { DataContext } from 'components/data';
 
 const AuthFormWrapper = styled.div`
   display: flex;
