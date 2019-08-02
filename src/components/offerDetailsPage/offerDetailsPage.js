@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { gql } from 'apollo-boost';
+import { Query } from 'react-apollo';
 import Hero from 'components/hero/hero';
 import { MobileOfferExpirationTimer, OfferExpirationTimer } from 'components/offerExpirationTimer/offerExpirationTimer';
 import AuthForm from 'components/authForm/authForm';
@@ -17,6 +19,31 @@ function OfferDetailsPage() {
 
   return (
     <OfferDetailsPageWrapper>
+      <Query
+        query={gql`
+          {
+            pokemon(name: "Pikachu") {
+              id
+              number
+              name
+              attacks {
+                special {
+                  name
+                  type
+                  damage
+                }
+              }
+            }
+          }
+        `}
+      >
+        {({ data, loading }) => (
+          <>
+            {loading && <div>LOADING...</div>}
+            <h5>{`Go, ${data.pokemon.name}!`}</h5>
+          </>
+        )}
+      </Query>
       <Hero
         isPaymentFieldVisible={isPaymentFieldVisible}
         setIsPaymentFieldVisible={setIsPaymentFieldVisible}
@@ -32,7 +59,6 @@ function OfferDetailsPage() {
           )
           : <StudioInfo />
       }
-
       {!isPaymentFieldVisible
         && (
         <MobileStickyFooter

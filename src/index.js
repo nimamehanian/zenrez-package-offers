@@ -3,7 +3,9 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { createBrowserHistory } from 'history';
-import { Provider } from 'react-redux';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import { Provider as ReduxProvider } from 'react-redux';
 import { StripeProvider } from 'react-stripe-elements';
 import { STRIPE_KEY } from 'root/keys';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
@@ -30,14 +32,28 @@ epicMiddleware.run(combineEpics(
   // Epics for each connected component here
 ));
 
+const resolvers = {
+
+};
+
+const client = new ApolloClient({
+  // uri: 'https://api.zenrez.com/graphql',
+  uri: 'https://graphql-pokemon.now.sh',
+  clientState: {
+    resolvers,
+  },
+});
+
 const Root = ({ store }) => (
-  <StripeProvider apiKey={STRIPE_KEY}>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Route path="/" component={App} />
-      </ConnectedRouter>
-    </Provider>
-  </StripeProvider>
+  <ApolloProvider client={client}>
+    <StripeProvider apiKey={STRIPE_KEY}>
+      <ReduxProvider store={store}>
+        <ConnectedRouter history={history}>
+          <Route path="/" component={App} />
+        </ConnectedRouter>
+      </ReduxProvider>
+    </StripeProvider>
+  </ApolloProvider>
 );
 
 render(
