@@ -16,7 +16,7 @@ export const disableHighlight = `
 `;
 
 export const Backdrop = styled.div`
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0);
   position: fixed;
   top: 0px;
   right: 0px;

@@ -1,15 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { gql } from 'apollo-boost';
+import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import { DataContext } from 'components/data';
 import ArrowDown from 'icons/arrowDown';
 import { $text1, $white } from 'styles/colors';
 import { Backdrop, disableHighlight } from 'styles/mixins';
 
 function Header() {
-  const { logoUrl, studioUrl, colors: { primary } } = useContext(DataContext);
-
   const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -24,7 +23,7 @@ function Header() {
     }
   `;
 
-  function Dropdown() {
+  function Dropdown({ highlightColor }) {
     const DropdownWrapper = styled.div`
       position: relative;
       ${disableHighlight}
@@ -80,7 +79,7 @@ function Header() {
         transition: all 0.15s ease;
         &:hover {
           color: ${$white};
-          background: ${primary};
+          background: ${highlightColor};
         }
       `;
 
@@ -99,11 +98,7 @@ function Header() {
       }, [isDropdownOpen]);
 
       return (
-        <MenuWrapper
-          style={{
-            opacity: opacity.interpolate(o => o),
-          }}
-        >
+        <MenuWrapper style={{ opacity }}>
           {menuItems.map(({ text, path }, idx) => (
             <Link to={path} key={`section_${idx + 1}`}>
               <MenuItem key={`item_${idx + 1}`}>{text}</MenuItem>
@@ -129,12 +124,16 @@ function Header() {
   }
 
   return (
-    <HeaderWrapper>
-      <a href={studioUrl} target="_blank" rel="noopener noreferrer">
-        <img src={logoUrl} alt="logo" />
-      </a>
-      <Dropdown />
-    </HeaderWrapper>
+    <Query query={gql`{ studioUrl, logoUrl, colors { primary } }`}>
+      {({ data: { studioUrl, logoUrl, colors: { primary } } }) => (
+        <HeaderWrapper>
+          <a href={studioUrl} target="_blank" rel="noopener noreferrer">
+            <img src={logoUrl} alt="logo" />
+          </a>
+          <Dropdown highlightColor={primary} />
+        </HeaderWrapper>
+      )}
+    </Query>
   );
 }
 
