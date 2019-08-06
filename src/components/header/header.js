@@ -18,9 +18,11 @@ function Header() {
       },
     },
   } = useQuery(gql`{
-    colors { primary }
-    studioUrl
-    logoUrl
+    offerDetails {
+      colors { primary }
+      studioUrl
+      logoUrl
+    }
   }`);
 
   const HeaderWrapper = styled.div`
