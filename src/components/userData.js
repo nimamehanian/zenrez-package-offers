@@ -36,7 +36,7 @@ PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY. BY CLICKING “I ACCEPT THE TE
 5. Vendor Content Disclaimer. Certain features of the service may permit Vendors to post content, including photographs, text, information regarding Events, and other types of works (collectively, “Vendor Content”). We are under no obligation to edit or control Vendor Content that Vendors post or publish, and will not be in any way responsible or liable for Vendor Content. Zenrez may, however, at any time and without prior notice, screen, remove, edit, or block any Vendor Content that in our sole judgment violates these Terms or is otherwise objectionable. You understand that when using the Service you will be exposed to Vendor Content and content posted on the Service by Zenrez on Vendors’ behalf (collectively, “Content”) from a variety of sources and acknowledge that Content may be inaccurate, offensive, indecent or objectionable. You agree to waive, and hereby do waive, any legal or equitable rights or remedies you have or may have against Zenrez with respect to Content. We expressly disclaim any and all liability in connection with Content. If notified by a user or content owner that Content allegedly does not conform to these Terms, we may investigate the allegation and determine in our sole discretion whether to remove the Content, which we reserve the right to do at any time and without notice. For clarity, Zenrez does not permit copyright-infringing activities on the Service.
 `;
 
-const response = {
+export const userData = {
   firstName: 'Nima',
   lastName: 'Mehanian',
   email: 'nima.mehanian@gmail.com',
@@ -50,6 +50,7 @@ const response = {
       renewalDate: 'July 9th, 2019',
       price: '$200',
       terms: termsAndCond1,
+      __typename: 'Membership',
     },
     {
       title: 'pilates — unlimited',
@@ -59,6 +60,7 @@ const response = {
       renewalDate: 'July 10th, 2019',
       price: '$240',
       terms: termsAndCond2,
+      __typename: 'Membership',
     },
   ],
   purchases: [
@@ -67,28 +69,31 @@ const response = {
       packageName: '10 Classes',
       expirationDate: '08/18/18',
       price: '$270',
+      __typename: 'Purchase',
     },
     {
       purchaseDate: '07/18/18',
       packageName: '10 Classes',
       expirationDate: '08/18/18',
       price: '$270',
+      __typename: 'Purchase',
     },
     {
       purchaseDate: '07/18/18',
       packageName: '10 Classes',
       expirationDate: '08/18/18',
       price: '$270',
+      __typename: 'Purchase',
     },
     {
       purchaseDate: '07/18/18',
       packageName: '10 Classes',
       expirationDate: '08/18/18',
       price: '$270',
+      __typename: 'Purchase',
     },
   ],
+  __typename: 'User',
 };
 
-const UserContext = React.createContext(response);
-
-export default UserContext;
+export const UserContext = React.createContext(userData);

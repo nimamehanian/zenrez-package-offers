@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
-import { Query } from 'react-apollo';
+import { useQuery } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
@@ -9,6 +9,20 @@ import { $text1, $white } from 'styles/colors';
 import { Backdrop, disableHighlight } from 'styles/mixins';
 
 function Header() {
+  const {
+    data: {
+      offerDetails: {
+        colors: { primary },
+        studioUrl,
+        logoUrl,
+      },
+    },
+  } = useQuery(gql`{
+    colors { primary }
+    studioUrl
+    logoUrl
+  }`);
+
   const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -124,16 +138,12 @@ function Header() {
   }
 
   return (
-    <Query query={gql`{ studioUrl, logoUrl, colors { primary } }`}>
-      {({ data: { studioUrl, logoUrl, colors: { primary } } }) => (
-        <HeaderWrapper>
-          <a href={studioUrl} target="_blank" rel="noopener noreferrer">
-            <img src={logoUrl} alt="logo" />
-          </a>
-          <Dropdown highlightColor={primary} />
-        </HeaderWrapper>
-      )}
-    </Query>
+    <HeaderWrapper>
+      <a href={studioUrl} target="_blank" rel="noopener noreferrer">
+        <img src={logoUrl} alt="logo" />
+      </a>
+      <Dropdown highlightColor={primary} />
+    </HeaderWrapper>
   );
 }
 

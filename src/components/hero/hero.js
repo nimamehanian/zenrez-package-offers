@@ -6,6 +6,15 @@ import { $slate, $text1 } from 'styles/colors';
 function Hero({
   isPaymentFieldVisible,
   setIsPaymentFieldVisible,
+  primaryColor,
+  classTitle,
+  classQuantity,
+  actualPrice,
+  retailPrice,
+  pricePerClass,
+  discount,
+  durationValid,
+  imageUrl,
 }) {
   const HeroWrapper = styled.div`
     display: flex;
@@ -23,12 +32,26 @@ function Hero({
 
   return (
     <HeroWrapper>
-      <Image />
+      <Image
+        discount={discount}
+        imageUrl={imageUrl}
+      />
       <PricingInfo
         isPaymentFieldVisible={isPaymentFieldVisible}
         setIsPaymentFieldVisible={setIsPaymentFieldVisible}
+        primaryColor={primaryColor}
+        classTitle={classTitle}
+        classQuantity={classQuantity}
+        actualPrice={actualPrice}
+        retailPrice={retailPrice}
+        pricePerClass={pricePerClass}
+        discount={discount}
+        durationValid={durationValid}
       />
-      <MobileBadge />
+      <MobileBadge
+        discount={discount}
+        primaryColor={primaryColor}
+      />
     </HeroWrapper>
   );
 }

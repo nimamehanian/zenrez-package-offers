@@ -1,14 +1,17 @@
-import React, { useContext, Component } from 'react';
+import React, { Component } from 'react';
 import { Elements, injectStripe, CardElement } from 'react-stripe-elements';
 import styled from 'styled-components';
 import Button from 'components/button/button';
 import Checkbox from '@material-ui/core/Checkbox';
-import { DataContext } from 'components/data';
 import { $text1 } from 'styles/colors';
 
-function PaymentField({ setIsPaymentFieldVisible }) {
-  const { discount, retailPrice, tax } = useContext(DataContext);
-
+function PaymentField({
+  setIsPaymentFieldVisible,
+  discount,
+  retailPrice,
+  tax,
+  primaryColor,
+}) {
   const PaymentFieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -164,16 +167,18 @@ function PaymentField({ setIsPaymentFieldVisible }) {
           </section>
           <section>
             <Button
-              text="cancel"
               isSecondary
+              text="cancel"
               style={{ margin: '16px 8px' }}
+              primaryColor={primaryColor}
               onClickHandler={() => setIsPaymentFieldVisible(false)}
             />
             <Button
+              disabled={!isCardValid}
               text="buy now"
               style={{ margin: '16px 8px' }}
+              primaryColor={primaryColor}
               onClickHandler={this.chargeCard}
-              disabled={!isCardValid}
             />
           </section>
         </div>

@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { $grey3, $white } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
-import { DataContext } from 'components/data';
 
 function Button({
   text,
+  primaryColor,
   onClickHandler,
   hideOnMobile,
   isMobile,
@@ -13,14 +13,12 @@ function Button({
   disabled,
   style,
 }) {
-  const { colors: { primary } } = useContext(DataContext);
-
   const ButtonWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${disabled ? $grey3 : (isSecondary ? $white : primary)};
-    color: ${disabled ? $white : (isSecondary ? primary : $white)};
+    background: ${disabled ? $grey3 : (isSecondary ? $white : primaryColor)};
+    color: ${disabled ? $white : (isSecondary ? primaryColor : $white)};
     height: 44px;
     width: 343px;
     border-radius: 6px;

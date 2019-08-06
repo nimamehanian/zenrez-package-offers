@@ -2,7 +2,7 @@ import React, { createRef, Component } from 'react';
 import { Elements, injectStripe } from 'react-stripe-elements';
 import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
-import UserContext from 'components/userData';
+import { UserContext } from 'components/userData';
 import {
   AccountWrapper,
   AccountCard,

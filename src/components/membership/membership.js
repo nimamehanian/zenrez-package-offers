@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import UserContext from 'components/userData';
+import { UserContext } from 'components/userData';
+// import { gql } from 'apollo-boost';
+// import { useQuery } from 'react-apollo';
 import styled from 'styled-components';
 import { AccountWrapper, SectionTitle } from 'components/account/accountSubcomponents';
 import { MembershipCard } from 'components/membership/membershipSubcomponents';
 
 function Membership() {
   const { memberships, purchases } = useContext(UserContext);
+  // const { data } = useQuery(gql`{
+
+  // }`);
 
   const SectionWrapper = styled(AccountWrapper)``;
 

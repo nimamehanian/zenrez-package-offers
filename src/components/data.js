@@ -35,6 +35,7 @@ export const offerDetails = {
       __typename: 'Location',
     },
   ],
+  __typename: 'Offer',
 };
 
 export const DataContext = React.createContext(offerDetails);

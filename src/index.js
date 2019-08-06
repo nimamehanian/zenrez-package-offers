@@ -11,6 +11,7 @@ import { STRIPE_KEY } from 'root/keys';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { offerDetails } from 'components/data';
+import { userData } from 'components/userData';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import App from 'components/app/appContainer';
@@ -33,7 +34,10 @@ epicMiddleware.run(combineEpics(
   // Epics for each connected component here
 ));
 
-const data = offerDetails;
+const data = {
+  offerDetails: { ...offerDetails },
+  userData: { ...userData },
+};
 const cache = new InMemoryCache();
 const client = new ApolloClient({
   // uri: 'https://api.zenrez.com/graphql',

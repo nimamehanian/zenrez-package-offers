@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { DataContext } from 'components/data';
 import LocationPin from 'icons/locationPin';
 
-function StudioInfo() {
-  const { locations, studioDescription, colors: { primary } } = useContext(DataContext);
-
+function StudioInfo({ studioDescription, locations, primaryColor }) {
   const StudioInfoWrapper = styled.div`
     position: relative;
     display: flex;
@@ -62,7 +59,7 @@ function StudioInfo() {
         {
           locations.map(({ studioName, studioAddress, studioCityStateZip }, idx) => (
             <LocationWrapper key={`location_${idx + 1}`}>
-              <span role="img" aria-label="location"><LocationPin color={primary} /></span>
+              <span role="img" aria-label="location"><LocationPin color={primaryColor} /></span>
               <div>
                 <Name>{studioName}</Name>
                 <div>{studioAddress}</div>

@@ -8,7 +8,6 @@ import { InputAdornment, IconButton } from '@material-ui/core';
 import Button from 'components/button/button';
 import { $slate } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
-import { DataContext } from 'components/data';
 
 const AuthFormWrapper = styled.div`
   display: flex;
@@ -117,180 +116,179 @@ class AuthForm extends Component {
       showPassword,
     } = this.state;
 
+    const { studioName, primaryColor } = this.props;
+
     return (
-      <DataContext.Consumer>
-        {({ studioName, colors: { primary } }) => (
-          <AuthFormWrapper primaryColor={primary}>
-            <Title>{copy[mode].title}</Title>
-            <Spring
-              native
-              to={{
-                opacity: mode === 'signup' ? 1 : 0,
-                height: mode === 'signup' ? 48 : 0,
-                yPos: mode === 'signup' ? 0 : 48,
-              }}
-              config={(keys) => {
-                switch (keys) {
-                  case 'opacity':
-                    return { mass: 1, tension: 720, friction: 24 };
-                  default:
-                    return { mass: 1, tension: 360, friction: 36 };
-                }
-              }}
-            >
-              {({ opacity, height, yPos }) => (
-                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
-                  <NameInputs>
-                    <TextField
-                      type="text"
-                      name="firstName"
-                      label="First Name"
-                      value={formData.firstName}
-                      onChange={this.handleChange('firstName')}
-                    />
-                    <TextField
-                      type="text"
-                      name="lastName"
-                      label="Last Name"
-                      value={formData.lastName}
-                      onChange={this.handleChange('lastName')}
-                    />
-                  </NameInputs>
-                </animated.div>
-              )}
-            </Spring>
-            <TextField
-              type="email"
-              name="email"
-              label="Email"
-              value={formData.email}
-              onChange={this.handleChange('email')}
-            />
-            <Spring
-              native
-              to={{
-                opacity: mode === 'signup' || mode === 'login' ? 1 : 0,
-                height: mode === 'signup' || mode === 'login' ? 48 : 0,
-                yPos: mode === 'signup' || mode === 'login' ? 0 : -48,
-              }}
-              config={(keys) => {
-                switch (keys) {
-                  case 'opacity':
-                    return { mass: 1, tension: 720, friction: 24 };
-                  default:
-                    return { mass: 1, tension: 360, friction: 36 };
-                }
-              }}
-            >
-              {({ opacity, height, yPos }) => (
-                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
-                  <TextField
-                    type={showPassword ? 'passwordtext' : 'password'}
-                    name="password"
-                    label="Password"
-                    value={formData.password}
-                    onChange={this.handleChange('password')}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            edge="end"
-                            aria-label="toggle password visibility"
-                            onClick={() => this.setState({ showPassword: !showPassword })}
-                          >
-                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </animated.div>
-              )}
-            </Spring>
-            <Spring
-              native
-              to={{
-                opacity: mode === 'signup' ? 1 : 0,
-                height: mode === 'signup' ? 48 : 0,
-                yPos: mode === 'signup' ? 0 : -48,
-              }}
-              config={(keys) => {
-                switch (keys) {
-                  case 'opacity':
-                    return { mass: 1, tension: 720, friction: 24 };
-                  default:
-                    return { mass: 1, tension: 360, friction: 36 };
-                }
-              }}
-            >
-              {({ opacity, height, yPos }) => (
-                <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
-                  <TextField
-                    type="tel"
-                    name="phoneNumber"
-                    label="Phone Number"
-                    value={formData.phoneNumber}
-                    onChange={this.handleChange('phoneNumber')}
-                  />
-                </animated.div>
-              )}
-            </Spring>
-            <Button
-              text={copy[mode].buttonText}
-              style={{ margin: '16px 0px 0px' }}
-            />
-            {
-              mode === 'signup' && (
-                <p>
-                  {`
-                    By creating an account, I authorize ${studioName}
-                    to create a MINDBODY account on my behalf,
-                    which is used to schedule classes and add passes to my account.
-                  `}
-                </p>
-              )
+      <AuthFormWrapper primaryColor={primaryColor}>
+        <Title>{copy[mode].title}</Title>
+        <Spring
+          native
+          to={{
+            opacity: mode === 'signup' ? 1 : 0,
+            height: mode === 'signup' ? 48 : 0,
+            yPos: mode === 'signup' ? 0 : 48,
+          }}
+          config={(keys) => {
+            switch (keys) {
+              case 'opacity':
+                return { mass: 1, tension: 720, friction: 24 };
+              default:
+                return { mass: 1, tension: 360, friction: 36 };
             }
-            <AuthOptions>
-              {
-                mode === 'signup' && (
-                  <>
-                    Already have an account?
-                    <span onClick={() => this.setState({ mode: 'login' })}>Log in</span>
-                  </>
-                )
-              }
-              {
-                mode === 'login' && (
-                  <>
-                    <div>
-                      Don&apos;t have an account?
-                      <span onClick={() => this.setState({ mode: 'signup' })}>Make one!</span>
-                    </div>
-                    <div>
-                      Forgot your password?
-                      <span onClick={() => this.setState({ mode: 'resetPw' })}>Let&apos;s reset it!</span>
-                    </div>
-                  </>
-                )
-              }
-              {
-                mode === 'resetPw' && (
-                  <>
-                    <div>
-                      Don&apos;t have an account?
-                      <span onClick={() => this.setState({ mode: 'signup' })}>Make one!</span>
-                    </div>
-                    <div>
-                      Remember your credentials?
-                      <span onClick={() => this.setState({ mode: 'login' })}>Log in!</span>
-                    </div>
-                  </>
-                )
-              }
-            </AuthOptions>
-          </AuthFormWrapper>
-        )}
-      </DataContext.Consumer>
+          }}
+        >
+          {({ opacity, height, yPos }) => (
+            <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+              <NameInputs>
+                <TextField
+                  type="text"
+                  name="firstName"
+                  label="First Name"
+                  value={formData.firstName}
+                  onChange={this.handleChange('firstName')}
+                />
+                <TextField
+                  type="text"
+                  name="lastName"
+                  label="Last Name"
+                  value={formData.lastName}
+                  onChange={this.handleChange('lastName')}
+                />
+              </NameInputs>
+            </animated.div>
+          )}
+        </Spring>
+        <TextField
+          type="email"
+          name="email"
+          label="Email"
+          value={formData.email}
+          onChange={this.handleChange('email')}
+        />
+        <Spring
+          native
+          to={{
+            opacity: mode === 'signup' || mode === 'login' ? 1 : 0,
+            height: mode === 'signup' || mode === 'login' ? 48 : 0,
+            yPos: mode === 'signup' || mode === 'login' ? 0 : -48,
+          }}
+          config={(keys) => {
+            switch (keys) {
+              case 'opacity':
+                return { mass: 1, tension: 720, friction: 24 };
+              default:
+                return { mass: 1, tension: 360, friction: 36 };
+            }
+          }}
+        >
+          {({ opacity, height, yPos }) => (
+            <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+              <TextField
+                type={showPassword ? 'passwordtext' : 'password'}
+                name="password"
+                label="Password"
+                value={formData.password}
+                onChange={this.handleChange('password')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        aria-label="toggle password visibility"
+                        onClick={() => this.setState({ showPassword: !showPassword })}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </animated.div>
+          )}
+        </Spring>
+        <Spring
+          native
+          to={{
+            opacity: mode === 'signup' ? 1 : 0,
+            height: mode === 'signup' ? 48 : 0,
+            yPos: mode === 'signup' ? 0 : -48,
+          }}
+          config={(keys) => {
+            switch (keys) {
+              case 'opacity':
+                return { mass: 1, tension: 720, friction: 24 };
+              default:
+                return { mass: 1, tension: 360, friction: 36 };
+            }
+          }}
+        >
+          {({ opacity, height, yPos }) => (
+            <animated.div style={{ opacity, height, transform: yPos.interpolate(y => `translate3d(0px, ${y}px, 0px)`) }}>
+              <TextField
+                type="tel"
+                name="phoneNumber"
+                label="Phone Number"
+                value={formData.phoneNumber}
+                onChange={this.handleChange('phoneNumber')}
+              />
+            </animated.div>
+          )}
+        </Spring>
+        <Button
+          text={copy[mode].buttonText}
+          primaryColor={primaryColor}
+          style={{ margin: '16px 0px 0px' }}
+        />
+        {
+          mode === 'signup' && (
+            <p>
+              {`
+                By creating an account, I authorize ${studioName}
+                to create a MINDBODY account on my behalf,
+                which is used to schedule classes and add passes to my account.
+              `}
+            </p>
+          )
+        }
+        <AuthOptions>
+          {
+            mode === 'signup' && (
+              <>
+                Already have an account?
+                <span onClick={() => this.setState({ mode: 'login' })}>Log in</span>
+              </>
+            )
+          }
+          {
+            mode === 'login' && (
+              <>
+                <div>
+                  Don&apos;t have an account?
+                  <span onClick={() => this.setState({ mode: 'signup' })}>Make one!</span>
+                </div>
+                <div>
+                  Forgot your password?
+                  <span onClick={() => this.setState({ mode: 'resetPw' })}>Let&apos;s reset it!</span>
+                </div>
+              </>
+            )
+          }
+          {
+            mode === 'resetPw' && (
+              <>
+                <div>
+                  Don&apos;t have an account?
+                  <span onClick={() => this.setState({ mode: 'signup' })}>Make one!</span>
+                </div>
+                <div>
+                  Remember your credentials?
+                  <span onClick={() => this.setState({ mode: 'login' })}>Log in!</span>
+                </div>
+              </>
+            )
+          }
+        </AuthOptions>
+      </AuthFormWrapper>
     );
   }
 }

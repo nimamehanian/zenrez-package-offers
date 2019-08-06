@@ -1,26 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTrail, animated } from 'react-spring';
 import styled from 'styled-components';
 import { $text1, $white } from 'styles/colors';
 import Button from 'components/button/button';
-import { DataContext } from 'components/data';
 import { disableHighlight } from 'styles/mixins';
 
 export function PricingInfo({
   isPaymentFieldVisible,
   setIsPaymentFieldVisible,
+  primaryColor,
+  classTitle,
+  classQuantity,
+  actualPrice,
+  retailPrice,
+  pricePerClass,
+  discount,
+  durationValid,
 }) {
-  const {
-    colors: { primary },
-    classTitle,
-    classQuantity,
-    actualPrice,
-    retailPrice,
-    pricePerClass,
-    discount,
-    durationValid,
-  } = useContext(DataContext);
-
   const PricingInfoWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -99,7 +95,7 @@ export function PricingInfo({
   const SavingsSummary = styled.div`
     font-size: 16px;
     span {
-      color: ${primary};
+      color: ${primaryColor};
     }
   `;
 
@@ -128,6 +124,7 @@ export function PricingInfo({
       {!isPaymentFieldVisible && (
         <Button
           text="buy now"
+          primaryColor={primaryColor}
           onClickHandler={() => setIsPaymentFieldVisible(true)}
           hideOnMobile
         >
@@ -158,9 +155,7 @@ export function PricingInfo({
   );
 }
 
-export function MobileBadge() {
-  const { discount, colors: { primary } } = useContext(DataContext);
-
+export function MobileBadge({ discount, primaryColor }) {
   const BadgeWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -169,7 +164,7 @@ export function MobileBadge() {
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    background: ${primary};
+    background: ${primaryColor};
     color: ${$white};
     font-size: 16px;
     line-height: 1;
@@ -194,9 +189,7 @@ export function MobileBadge() {
   );
 }
 
-function Badge() {
-  const { discount, colors: { primary } } = useContext(DataContext);
-
+function Badge({ discount, primaryColor }) {
   const BadgeWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -208,7 +201,7 @@ function Badge() {
     height: 64px;
     width: 64px;
     border-radius: 50%;
-    background: ${primary};
+    background: ${primaryColor};
     color: ${$white};
     font-size: 16px;
     line-height: 1;
@@ -230,9 +223,7 @@ function Badge() {
   );
 }
 
-export function Image() {
-  const { discount, imageUrl } = useContext(DataContext);
-
+export function Image({ discount, imageUrl }) {
   const ImageWrapper = styled.div`
     position: relative;
   `;
