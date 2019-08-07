@@ -2,7 +2,8 @@ import React, { createRef, Component } from 'react';
 import { Elements, injectStripe } from 'react-stripe-elements';
 import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
-import { UserContext } from 'components/userData';
+import { gql } from 'apollo-boost';
+import { Query } from 'react-apollo';
 import {
   AccountWrapper,
   AccountCard,
@@ -76,12 +77,16 @@ class Account extends Component {
   render() {
     const { isCardValid, isPaymentFieldVisible } = this.state;
     return (
-      <UserContext.Consumer>
+      <Query query={gql`{ userData { firstName, lastName, email, phoneNumber } }`}>
         {({
-          firstName,
-          lastName,
-          email,
-          phoneNumber,
+          data: {
+            userData: {
+              firstName,
+              lastName,
+              email,
+              phoneNumber,
+            },
+          },
         }) => (
           <AccountWrapper>
             <SectionTitle>account overview</SectionTitle>
@@ -172,7 +177,7 @@ class Account extends Component {
             </div>
           </AccountWrapper>
         )}
-      </UserContext.Consumer>
+      </Query>
     );
   }
 }
