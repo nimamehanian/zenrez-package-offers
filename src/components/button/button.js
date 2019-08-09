@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { $grey3, $white } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
@@ -44,5 +45,25 @@ function Button({
     </ButtonWrapper>
   );
 }
+
+Button.defaultProps = {
+  onClickHandler: () => {},
+  hideOnMobile: false,
+  isMobile: false,
+  isSecondary: false,
+  disabled: false,
+  style: {},
+};
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  primaryColor: PropTypes.string.isRequired,
+  onClickHandler: PropTypes.func,
+  hideOnMobile: PropTypes.bool,
+  isMobile: PropTypes.bool,
+  isSecondary: PropTypes.bool,
+  disabled: PropTypes.bool,
+  style: PropTypes.object,
+};
 
 export default Button;

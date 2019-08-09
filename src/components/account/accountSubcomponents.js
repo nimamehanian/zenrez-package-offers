@@ -22,7 +22,6 @@ export const AccountWrapper = styled.div`
     align-items: center;
   }
 `;
-// height: calc(100vh - 120px);
 
 export const AccountCard = styled(animated.div)`
   background: ${$white};
