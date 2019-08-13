@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { useQuery } from 'react-apollo';
 import styled from 'styled-components';
 import Hero from 'components/hero/hero';

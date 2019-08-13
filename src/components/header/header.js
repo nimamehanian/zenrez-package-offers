@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
+import { HeaderQuery } from 'src/queries.gql';
 import { useQuery } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
@@ -7,6 +8,8 @@ import styled from 'styled-components';
 import ArrowDown from 'icons/arrowDown';
 import { $text1, $white } from 'styles/colors';
 import { Backdrop, disableHighlight } from 'styles/mixins';
+
+console.log(HeaderQuery);
 
 function Header() {
   const {
@@ -24,6 +27,8 @@ function Header() {
       logoUrl
     }
   }`);
+
+  // gql`${HeaderQuery}`
 
   const HeaderWrapper = styled.div`
     display: flex;

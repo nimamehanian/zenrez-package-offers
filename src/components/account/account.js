@@ -2,7 +2,7 @@ import React, { createRef, Component } from 'react';
 import { Elements, injectStripe } from 'react-stripe-elements';
 import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
-import { gql } from 'apollo-boost';
+import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import {
   AccountWrapper,

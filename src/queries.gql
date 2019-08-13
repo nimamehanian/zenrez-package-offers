@@ -1,0 +1,19 @@
+query HeaderQuery {
+  offerDetails {
+    colors { primary }
+    studioUrl
+    logoUrl
+  }
+}
+
+query OfferDetails {
+
+}
+
+query Account {
+
+}
+
+query Membership {
+
+}

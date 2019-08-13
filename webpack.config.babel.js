@@ -20,6 +20,11 @@ const config = {
         loader: 'babel-loader',
       },
       {
+        test: /\.(gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      },
+      {
         test: /\.(gif|jpg|png|svg|eot|otf|ttf|woff(2)?)$/,
         exclude: /node_modules/,
         loader: 'url-loader?name=/[name].[ext]',
@@ -37,6 +42,7 @@ const config = {
       images: `${__dirname}/src/images`,
       styles: `${__dirname}/src/styles`,
       utils: `${__dirname}/src/utils`,
+      src: `${__dirname}/src`,
       root: `${__dirname}`,
     },
   },

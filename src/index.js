@@ -3,7 +3,9 @@ import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { createBrowserHistory } from 'history';
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import { Provider as ReduxProvider } from 'react-redux';
 import { StripeProvider } from 'react-stripe-elements';
@@ -39,9 +41,10 @@ const data = {
   userData: { ...userData },
 };
 const cache = new InMemoryCache();
+const link = new HttpLink({ uri: 'https://api.zenrez.com/graphql' });
 const client = new ApolloClient({
-  // uri: 'https://api.zenrez.com/graphql',
-  uri: 'https://graphql-pokemon.now.sh',
+  // uri: 'https://graphql-pokemon.now.sh',
+  link,
   cache,
 });
 cache.writeData({ data });
