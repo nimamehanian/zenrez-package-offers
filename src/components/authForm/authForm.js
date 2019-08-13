@@ -72,7 +72,7 @@ class AuthForm extends Component {
     super(props);
     this.state = {
       // mode options: `signup`, `login`, and `resetPw`
-      mode: 'signup',
+      mode: 'login',
       showPassword: false,
       formData: {
         firstName: '',
