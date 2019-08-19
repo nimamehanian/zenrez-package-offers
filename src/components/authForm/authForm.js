@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
 import { Spring, animated } from 'react-spring/renderprops';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
@@ -8,6 +10,14 @@ import { InputAdornment, IconButton } from '@material-ui/core';
 import Button from 'components/button/button';
 import { $slate } from 'styles/colors';
 import { disableHighlight } from 'styles/mixins';
+
+const LOGIN_MUTATION = gql`
+  mutation {
+    serviceLandingLogin(studioId: $studioId, username: $studioId, password: $studioId) {
+      accessToken
+    }
+  }
+`;
 
 const AuthFormWrapper = styled.div`
   display: flex;
@@ -75,6 +85,7 @@ class AuthForm extends Component {
       mode: 'login',
       showPassword: false,
       formData: {
+        studioId: 'mbo|743',
         firstName: '',
         lastName: '',
         email: '',
@@ -97,6 +108,10 @@ class AuthForm extends Component {
       },
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
   }
 
   handleChange(key) {
@@ -108,11 +123,62 @@ class AuthForm extends Component {
     );
   }
 
+  signup() {
+    const {
+      formData: {
+        studioId,
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
+      },
+    } = this.state;
+    console.log(`SIGNUP: ${studioId} :: ${firstName} :: ${lastName} :: ${email} :: ${password} :: ${phoneNumber}`);
+  }
+
+  login() {
+    // const { mutate } = this.props;
+    const { formData: { studioId, email, password } } = this.state;
+    console.log(`LOGIN: ${studioId} : ${email} : ${password}`);
+  }
+
+  resetPassword() {
+    const { formData: { email } } = this.state;
+    console.log(`RESET PASSWORD: ${email}`);
+  }
+
+  handleSubmit(mutation) {
+    console.log('mutation', mutation);
+    mutation();
+    const { mode } = this.state;
+    switch (mode) {
+      case 'signup':
+        this.signup();
+        break;
+      case 'login':
+        this.login();
+        break;
+      case 'resetPw':
+        this.resetPassword();
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     const {
       copy,
       mode,
-      formData,
+      formData: {
+        studioId,
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
+      },
       showPassword,
     } = this.state;
 
@@ -144,14 +210,14 @@ class AuthForm extends Component {
                   type="text"
                   name="firstName"
                   label="First Name"
-                  value={formData.firstName}
+                  value={firstName}
                   onChange={this.handleChange('firstName')}
                 />
                 <TextField
                   type="text"
                   name="lastName"
                   label="Last Name"
-                  value={formData.lastName}
+                  value={lastName}
                   onChange={this.handleChange('lastName')}
                 />
               </NameInputs>
@@ -162,7 +228,7 @@ class AuthForm extends Component {
           type="email"
           name="email"
           label="Email"
-          value={formData.email}
+          value={email}
           onChange={this.handleChange('email')}
         />
         <Spring
@@ -187,7 +253,7 @@ class AuthForm extends Component {
                 type={showPassword ? 'passwordtext' : 'password'}
                 name="password"
                 label="Password"
-                value={formData.password}
+                value={password}
                 onChange={this.handleChange('password')}
                 InputProps={{
                   endAdornment: (
@@ -228,17 +294,28 @@ class AuthForm extends Component {
                 type="tel"
                 name="phoneNumber"
                 label="Phone Number"
-                value={formData.phoneNumber}
+                value={phoneNumber}
                 onChange={this.handleChange('phoneNumber')}
               />
             </animated.div>
           )}
         </Spring>
-        <Button
-          text={copy[mode].buttonText}
-          primaryColor={primaryColor}
-          style={{ margin: '16px 0px 0px' }}
-        />
+        <Mutation
+          mutation={LOGIN_MUTATION}
+          variables={{ studioId, email, password }}
+          onCompleted={data => console.log('DATA:', data)}
+        >
+          {(mutation) => {
+            return (
+              <Button
+                onClickHandler={() => this.handleSubmit(mutation)}
+                text={copy[mode].buttonText}
+                primaryColor={primaryColor}
+                style={{ margin: '16px 0px 0px' }}
+              />
+            );
+          }}
+        </Mutation>
         {
           mode === 'signup' && (
             <p>

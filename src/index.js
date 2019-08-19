@@ -43,7 +43,6 @@ const data = {
 const cache = new InMemoryCache();
 const link = new HttpLink({ uri: 'https://api.zenrez.com/graphql' });
 const client = new ApolloClient({
-  // uri: 'https://graphql-pokemon.now.sh',
   link,
   cache,
 });
